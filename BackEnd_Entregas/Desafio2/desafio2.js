@@ -26,22 +26,31 @@ class ProductManager {
             }
         }
         
-        async save(obj) {
+        async save(obj, code) {
             try{
                 let productos = await this.getAll();
                 let  newId
-                productos.length === 0 ? newId = 1 : newId = productos[productos.length-1].id + 1;
-                let newObj = {...obj, id : newId};
-                // const validar =  productos.find((prod) => prod.code === code)
-                // validar ? console.log(`¡Codigo ${validar.code} ya existente!`) : productos.push(newObj);
-                productos.push(newObj);
-                await this.writeFile(productos)
-                return newObj.id
+                const validarCode = productos.find((prod) => prod.code === code)
                 
+                if(validarCode) return console.log(`¡Codigo ${validarCode.code} ya existente!`)
+                else {
+                    productos.length === 0 ? newId = 1 : newId = productos[productos.length-1].id + 1;
+                    let newObj = {...obj, id : newId};
+                    productos.push(newObj);
+                    await this.writeFile(productos)
+                    return newObj.id
+
+                }
             }catch(err){
                 console.log(`error: ${err}`);
             }
         }
+
+        // async ValidarCode(code) {
+        //     let productos = await this.getAll();
+        //     const validar =   productos.find((prod) => prod.code === code)
+        //     // validar ? console.log(`¡Codigo ${validar.code} ya existente!`) : productos.push(newObj);
+        // }
 
         async getById(id) {
             try{
@@ -100,6 +109,7 @@ const test = async () => {
     // let getAllMod = await products.getAll();
     // let deleteAll = await products.deleteAll();
     // let getAllEmpty = await products.getAll();
+    
     // console.log(getAll);
     // console.log(getById);
     // console.log(deleteById);
@@ -107,30 +117,30 @@ const test = async () => {
     // console.log(deleteAll);
     // console.log(getAllEmpty);
 
-    // let saveUno = await products.save({
-    //     code: 'abc1',
-    //     title: 'Remera',
-    //     descrption: 'Remera manga larga lisa',
-    //     price: 8000,
-    //     thumbail:'https://http2.mlstatic.com/D_NQ_NP_607807-MLA52400120702_112022-O.webp',
-    //     stock: 10
-    // });
-    // let saveDos = await products.save({
-    //     code: 'abc2',
-    //     title: 'Pantalon',
-    //     descrption: 'Pantalon largo',
-    //     price: 12000,
-    //     thumbail:'https://http2.mlstatic.com/D_NQ_NP_607807-MLA52400120702_112022-O.webp',
-    //     stock: 15
-    // });
-    // let saveThree = await products.save({
-    //     code: 'abc3',
-    //     title: 'Campera',
-    //     descrption: 'Campera cuero',
-    //     price: 18000,
-    //     thumbail:'https://http2.mlstatic.com/D_NQ_NP_607807-MLA52400120702_112022-O.webp',
-    //     stock: 8
-    // }); 
+    let saveUno = await products.save({
+        code: 'abc1',
+        title: 'Remera',
+        descrption: 'Remera manga larga lisa',
+        price: 8000,
+        thumbail:'https://http2.mlstatic.com/D_NQ_NP_607807-MLA52400120702_112022-O.webp',
+        stock: 10
+    });
+    let saveDos = await products.save({
+        code: 'abc2',
+        title: 'Pantalon',
+        descrption: 'Pantalon largo',
+        price: 12000,
+        thumbail:'https://http2.mlstatic.com/D_NQ_NP_607807-MLA52400120702_112022-O.webp',
+        stock: 15
+    });
+    let saveThree = await products.save({
+        code: 'abc3',
+        title: 'Campera',
+        descrption: 'Campera cuero',
+        price: 18000,
+        thumbail:'https://http2.mlstatic.com/D_NQ_NP_607807-MLA52400120702_112022-O.webp',
+        stock: 8
+    }); 
     // let getFinally = await products.getAll();
     // let wanted = await products.getById(2);
     // console.log(getFinally);
