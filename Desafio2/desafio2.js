@@ -142,7 +142,7 @@ const product = new ProductManager()
 
 
 // Agregar producto
-// product.addProducts('abc1','pantalon','pantalon largo','6500','sin imagen',10)
+product.addProducts('abc1','pantalon','pantalon largo','6500','sin imagen',10)
 
 // //Agregar segundo producto
 // product.addProducts('abc2','remera','remera manga larga','2500','sin imagen',20)
