@@ -15,7 +15,9 @@ class ProductManager {
                     ProductInfoJs =  this.products
                     return console.log(ProductInfoJs); 
 
-            }else return fs.promises.writeFile(this.path,JSON.stringify(this.products, null , 2))
+            }else return await fs.promises.writeFile(this.path,JSON.stringify(this.products, null , 2))
+            // }else return []
+
         }catch(error){
             console.log(error);
         }
@@ -43,8 +45,8 @@ class ProductManager {
                         thumbnail,
                         stock
                     }
-                    this.products.push(evento);
-                    await fs.promises.writeFile(this.path,JSON.stringify(this.products, null , 2))
+                    await this.products.push(evento);
+                    fs.promises.writeFile(this.path,JSON.stringify(this.products, null , 2))
                 }
             }    
         }catch(error){
@@ -107,17 +109,18 @@ class ProductManager {
     async deleteAll() {
         if(fs.existsSync(this.path)){
             this.products = []
-            this.getProducts(this.products)
+            // this.getProducts(this.products)
             let readFile = await fs.promises.readFile(this.path, 'utf-8')
-            readFile= JSON.parse(readFile);
+            // readFile=  JSON.parse(readFile);
+            console.log(this.products);
             return fs.promises.writeFile(this.path,JSON.stringify(this.products, null , 2))
         }
     }
-    // async viewDatabase(){
-    //     let readFile = await fs.promises.readFile(this.path, 'utf-8')
-    //         readFile= JSON.parse(readFile);
-    //         console.log( readFile);
-    // }
+    async viewDatabase(){
+        let readFile = await fs.promises.readFile(this.path, 'utf-8')
+            readFile= JSON.parse(readFile);
+            console.log( readFile);
+    }
 
     #generarId(){
         const id = 
@@ -134,25 +137,30 @@ class ProductManager {
     }
 
 }
-
 const product = new ProductManager()
 
 //Iniciar array []
 // product.getProducts();
 
-
-// Agregar producto
+//Agregar producto
 product.addProducts('abc1','pantalon','pantalon largo','6500','sin imagen',10)
 
+
 // //Agregar segundo producto
-// product.addProducts('abc2','remera','remera manga larga','2500','sin imagen',20)
+product.addProducts('abc2','remera','remera manga larga','2500','sin imagen',20)
+
+//Agregar tercer producto
+product.addProducts('abc3','remera','remera manga larga','2500','sin imagen',25)
+
+//Agregar cuarto producto
+product.addProducts('abc4','remera','remera manga larga','2500','sin imagen',25)
 
 
-// //codigo repetido
+//codigo repetido
 // product.addProducts('abc2','pantalon','pantalon largo','6500','sin imagen','10')
 
 //Busqueda por id de producto
-// product.getProductsByid(4);
+// product.getProductsByid(2);
 
 //Busqueda de producto por id no encontrado
 // product.getProductsByid(10)
@@ -162,9 +170,10 @@ product.addProducts('abc1','pantalon','pantalon largo','6500','sin imagen',10)
 
 
 //Borrar producto
-// product.deleteProduct(2);
+// product.deleteProduct(4);
 
 
 //Borrar todo
 // product.deleteAll();
+
 
