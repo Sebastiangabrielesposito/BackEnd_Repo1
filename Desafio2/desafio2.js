@@ -143,17 +143,17 @@ const product = new ProductManager()
 // product.getProducts();
 
 //Agregar producto
-product.addProducts('abc1','pantalon','pantalon largo','6500','sin imagen',10)
+// product.addProducts('abc1','pantalon','pantalon largo','6500','sin imagen',10)
 
 
 // //Agregar segundo producto
-product.addProducts('abc2','remera','remera manga larga','2500','sin imagen',20)
+// product.addProducts('abc2','remera','remera manga larga','2500','sin imagen',20)
 
 //Agregar tercer producto
-product.addProducts('abc3','remera','remera manga larga','2500','sin imagen',25)
+// product.addProducts('abc3','remera','remera manga larga','2500','sin imagen',25)
 
 //Agregar cuarto producto
-product.addProducts('abc4','remera','remera manga larga','2500','sin imagen',25)
+// product.addProducts('abc4','remera','remera manga larga','2500','sin imagen',25)
 
 
 //codigo repetido
