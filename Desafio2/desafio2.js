@@ -25,18 +25,15 @@ class ProductManager {
 
     async addProducts(code,title,description,price,thumbnail,stock){
         try{
-            const evaluarCampos = (!code || !title || !description || !price || !thumbnail || !stock, stock < 0)
-            if(evaluarCampos){
-                console.log("Error,campos sin rellenar");
-                return "error"
-            }else {
+            const camposValidos = (!code || !title || !description || !price || !thumbnail || !stock || stock < 0)
+            if(!camposValidos){
                 const EvaluarCode = this.#evaluarCode(code);
                 if(EvaluarCode) {
                     console.log(`Codigo {${code}} existe en base de datos`);
                     console.log(`Code {${code}} in database`);
 
                 }else {
-                    const evento = {
+                    const crearProducto = {
                         id: this.#generarId(),
                         code,
                         title,
@@ -45,9 +42,14 @@ class ProductManager {
                         thumbnail,
                         stock
                     }
-                    await this.products.push(evento);
+                    await this.products.push(crearProducto);
                     fs.promises.writeFile(this.path,JSON.stringify(this.products, null , 2))
                 }
+            }else {
+                console.log("Error,campos sin rellenar");
+                return "error"
+
+                
             }    
         }catch(error){
             console.log(error);
@@ -143,7 +145,7 @@ const product = new ProductManager()
 // product.getProducts();
 
 //Agregar producto
-// product.addProducts('abc1','pantalon','pantalon largo','6500','sin imagen',10)
+product.addProducts('abc1','pantalon','pantalon largo','6500','sin imagen',10)
 
 
 // //Agregar segundo producto
