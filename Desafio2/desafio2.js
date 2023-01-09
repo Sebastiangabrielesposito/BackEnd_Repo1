@@ -47,9 +47,7 @@ class ProductManager {
                 }
             }else {
                 console.log("Error,campos sin rellenar");
-                return "error"
-
-                
+                return "error"                
             }    
         }catch(error){
             console.log(error);
@@ -145,7 +143,7 @@ const product = new ProductManager()
 // product.getProducts();
 
 //Agregar producto
-product.addProducts('abc1','pantalon','pantalon largo','6500','sin imagen',10)
+// product.addProducts('abc1','pantalon','pantalon largo','6500','sin imagen',10)
 
 
 // //Agregar segundo producto
