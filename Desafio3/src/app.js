@@ -133,8 +133,7 @@ export class ProductManager {
         return ProductInfo.find(product => product.code === code)
     }
 
-}
-       
+}      
 const Product = new ProductManager('../product.json')
 
 
