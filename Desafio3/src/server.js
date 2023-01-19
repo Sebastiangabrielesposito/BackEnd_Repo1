@@ -22,8 +22,8 @@ app.get('/productos/:id',async(req,res)=>{
     res.json({productoLocalHostId})
 })
 
+const PORT = 8086
 
-    const PORT = 8086
 app.listen(PORT, ()=>{
     console.log(`Escuchando al ${PORT}`);
 })
