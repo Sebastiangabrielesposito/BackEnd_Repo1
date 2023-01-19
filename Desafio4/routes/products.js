@@ -1,8 +1,7 @@
 import { Router } from "express";
 import { ProductManager } from "../src/app.js";
 import { upload } from "../middlewares/multer.js";
-import	{codeValidator, stockValidator,titleValidator,descriptionValidator,categoryValidator,priceValidator,statusValidator,stock0Validator,thumbnailValidator} from '../middlewares/productValidator.js'
-
+import	{codeValidator, productValidator, stock0Validator} from '../middlewares/productValidator.js'
 
 const router = Router()
 
@@ -30,7 +29,7 @@ router.get('/:pid', async(req,res)=>{
     }
 })
 
-router.post('/', upload.single('file'), codeValidator , titleValidator, descriptionValidator, priceValidator,stockValidator,stock0Validator,categoryValidator,statusValidator,thumbnailValidator, async(req,res)=>{
+router.post('/', upload.single('file'), codeValidator , productValidator, stock0Validator ,async(req,res)=>{
     try{
         const obj = req.body
         const producto = await product.addProducts(obj)
