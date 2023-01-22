@@ -17,9 +17,13 @@ export const codeValidator = async (req, res, next) => {
 export const productValidator = (req, res, next) => {
     console.log("Ejecutando middleware product");
     const producto = req.body;
-    if (!producto.title || !producto.description || !producto.price || !producto.stock || !producto.category || !producto.status || !producto.thumbnail)res.send("Debes rellenar los campos correctamente");
+    let prodValidator = (!producto.code || !producto.title || !producto.description || !producto.price || !producto.stock || !producto.category || !producto.status  || producto.status === "false")
+    console.log(producto.status);
+    if (prodValidator)
+    res.send("Debes rellenar los campos correctamente");
     else next();
 };
+
 
 export const stock0Validator = (req, res, next) => {
     console.log("Ejecutando middleware stock");

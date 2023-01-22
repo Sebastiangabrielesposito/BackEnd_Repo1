@@ -22,8 +22,8 @@ router.get('/:pid', async(req,res)=>{
     try{
         const {pid} = req.params
         const prod = await product.getProductsByid(pid)
-        if(prod) res.status(200).json({mesagge:`Usuario encontrado con exito`, prod})
-        else res.status(400).json({mesagge:'Usuario no existe con ese id'})
+        if(prod) res.status(200).json({mesagge:`Producto encontrado con exito`, prod})
+        else res.status(400).json({mesagge:'Producto no existe con ese id'})
     }catch (error){
         console.log(error);
     }
@@ -54,7 +54,7 @@ router.delete('/:pid', async (req,res)=>{
     try{
         const {pid} = req.params
         const prod = await product.deleteProduct(parseInt(pid))
-        if(prod) res.status(200).json({mesagge:'Usuario eliminado con exito'})
+        if(prod) res.status(200).json({mesagge:'Producto eliminado con exito'})
         else res.status(400).json({mesagge: 'No existe usuario con ese id'})
     }catch (error){
         console.log(error);

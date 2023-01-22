@@ -52,7 +52,6 @@ export class ProductManager {
         try{
             const ProductInfo = await this.getProducts()
             const product = ProductInfo.findIndex(p=>p.id===pid)
-            if(product === -1) throw new error('Usuario no encontrado')
             const updateProd = {...ProductInfo[product],...obj}
             ProductInfo.splice(product,1,updateProd)
             await fs.promises.writeFile(this.path,JSON.stringify(ProductInfo))
