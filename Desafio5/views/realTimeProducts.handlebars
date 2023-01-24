@@ -1,0 +1,35 @@
+<h1>Productos:</h1>
+
+
+<h1 style="text-align: center; color: slategrey;font-family: cursive;">Agregar producto</h1>
+    <div style="display: flex; justify-content: center; padding: 15px; ">
+        <form action="realtimeproducts" method="post" style="display: flex; flex-direction: column; width: 300px;" enctype="multipart/form-data" id="form">
+        code: <input type="text" name="code" id="code" >
+        title: <input type="text" name="title" id="title" >
+        description: <input type="text" name="description" id="description" >
+        price: <input type="number" name="price" id="price" >
+        stock: <input type="number" name="stock" id="stock" >
+        category: <input type="text" name="category" id="category" >
+        status: <input type="text" name="status" id="status" >
+        thumbnails: <input type="text" name="thumbnails" id="thumbnails" >
+        File: <input type="file" name="file" style="margin: 10px 0;"required>
+        <input type="submit" value="Click" >
+        </form>
+    </div>
+    <p id="prod"></p>
+
+
+{{#each prod}} <br>
+<h2>Producto {{id}} </h2> 
+<h3>Codigo: {{code}}</h3>   
+<h3>Título: {{title}}</h3>
+<h3>Descripción: {{description}} </h3>
+<h3>Precio: ${{price}} </h3>
+<h3>Categoria: {{category}}</h3>
+<h3>Stock:{{stock}}</h3>
+<h4>Status: {{status}} </h4>
+<h4>fecha de carga:{{fecha}}</h4>
+{{/each}}
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="index.js"></script>

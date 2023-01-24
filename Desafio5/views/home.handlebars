@@ -1,0 +1,16 @@
+<h1>Productos</h1>
+
+{{#each prod}} <br>
+<h2>Producto {{id}} </h2> 
+<h3>Codigo: {{code}}</h3>   
+<h3>Título: {{title}}</h3>
+<h3>Descripción: {{description}} </h3>
+<h3>Precio: ${{price}} </h3>
+<h3>Categoria: {{category}}</h3>
+<h3>Stock:{{stock}}</h3>
+<h4>Status: {{status}} </h4>
+<h4>fecha de carga:{{fecha}}</h4>
+{{/each}}
+
+{{!-- <script src="/socket.io/socket.io.js"></script>
+<script src="index.js"></script> --}}

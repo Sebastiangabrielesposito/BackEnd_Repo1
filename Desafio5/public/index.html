@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar producto</title>
+</head>
+<body>
+    <h1 style="text-align: center; color: slategrey;font-family: cursive;">Agregar producto</h1>
+    <div style="display: flex; justify-content: center; padding: 15px; ">
+        <form action="/api/products" method="post" style="display: flex; flex-direction: column; width: 300px;" enctype="multipart/form-data" >
+        code: <input type="text" name="code" id="code" >
+        title: <input type="text" name="title" id="title" >
+        description: <input type="text" name="description" id="description" >
+        price: <input type="number" name="price" id="price" >
+        stock: <input type="number" name="stock" id="stock" >
+        category: <input type="text" name="category" id="category" >
+        status: <input type="text" name="status" id="status" >
+        thumbnails: <input type="text" name="thumbnails" id="thumbnails" >
+        File: <input type="file" name="file" style="margin: 10px 0;"required>
+        <input type="submit" value="Click" >
+        </form>
+    </div>
+</body>
+</html>
