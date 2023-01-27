@@ -42,20 +42,9 @@ socketClient.on('respuesta',(mensajes)=>{
     })
     parrafoNuevo.innerHTML = prod 
     const botones = document.querySelectorAll('button')
-    // console.log(mensajes[1].id);
-    
-    // const remove = (id)=>{
-    //     mensajes.find(m=> m.id ===id)
-    // }
     botones.forEach(boton=>{
         boton.onclick = (e) =>{
             console.log(e.target.id);
-        socketClient.emit('eliminar',(e.target.id)
-               
-            )
-            // console.log('aqui');
-        }
-
+        socketClient.emit('eliminar',(e.target.id))}
     })
-    
 })

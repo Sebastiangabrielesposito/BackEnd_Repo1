@@ -53,9 +53,6 @@ socketServer.on('connection', (socket) => {
         socketServer.emit('respuesta', productos)
     })
 
-    // socket.on('eliminar', (idRemove)=>{
-    //     console.log('escuchando');
-    // })
     socket.on('eliminar', (idRemove)=>{
         // console.log("Eliminando el item:", idRemove);
         const newList = [...productos];
