@@ -30,6 +30,7 @@ app.set('views',__dirName+'/views')
 // app.get('/', async(req, res) => { 
 //     res.render('index',{titulo: "index"})
 //   })
+
 const productos = []
 const PORT = 8080
 
@@ -47,12 +48,24 @@ socketServer.on('connection', (socket) => {
         console.log('Usuario desconectado');
     })
 
-    socket.on('enviar',(mensaje)=>{
-        productos.push(mensaje)
-        console.log(productos);
-        // socketServer.emit('respuesta1', `code: ${mensaje.codigo} </br> title: ${mensaje.titulo} </br> description: ${mensaje.descripcion} </br>
-        // price: $${mensaje.precio} </br> stock: ${mensaje.cantidad} </br>
-        // category: ${mensaje.categoria} </br> status: ${mensaje.estado} `)
-        socketServer.emit('respuesta1', productos)
+    socket.on('enviar',(mensajes)=>{
+        productos.push(mensajes)
+        socketServer.emit('respuesta', productos)
     })
+
+    // socket.on('eliminar', (idRemove)=>{
+    //     console.log('escuchando');
+    // })
+    socket.on('eliminar', (idRemove)=>{
+        // console.log("Eliminando el item:", idRemove);
+        const newList = [...productos];
+        const newListRemove = newList.filter(item => item.id !== idRemove);
+        console.log(newListRemove.length);
+        socketServer.emit('respuesta', newListRemove)
+    })
+
 })
+
+
+
+// console.log(generateUUID());

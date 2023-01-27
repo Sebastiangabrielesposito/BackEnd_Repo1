@@ -19,6 +19,7 @@ router.post('/', upload.single('file'), codeValidator , productValidator, stock0
     try{
         const obj = req.body
         const producto = await product.addProducts(obj)
+        
         res.render('realtimeproducts',{producto})
         console.log({mesagge:`Producto creado con exito`, producto})
     }catch (error){
@@ -26,14 +27,14 @@ router.post('/', upload.single('file'), codeValidator , productValidator, stock0
     }
 })
 
-router.delete('/:pid', async (req,res)=>{
-    try{
-        const {pid} = req.params
-        const prod = await product.deleteProduct(parseInt(pid))
-        if(prod) res.status(200).json({mesagge:'Producto eliminado con exito'})
-        else res.status(400).json({mesagge: 'No existe usuario con ese id'})
-    }catch (error){
-        console.log(error);
-    }
-})
+// router.delete('/:pid', async (req,res)=>{
+//     try{
+//         const {pid} = req.params
+//         const prod = await product.deleteProduct(parseInt(pid))
+//         if(prod) res.status(200).json({mesagge:'Producto eliminado con exito'})
+//         else res.status(400).json({mesagge: 'No existe usuario con ese id'})
+//     }catch (error){
+//         console.log(error);
+//     }
+// })
 export default router

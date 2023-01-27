@@ -37,7 +37,7 @@ router.post('/', upload.single('file'), codeValidator , productValidator, stock0
         const obj = req.body
         const producto = await product.addProducts(obj)
         // res.json({mesagge:`Producto creado con exito`, producto})
-        res.redirect('/realtimeproducts')
+        res.redirect('/api/products')
     }catch (error){
         console.log(error);
     }
