@@ -40,8 +40,11 @@ socketClient.on('respuesta',(mensajes)=>{
         prod += `<p>id: ${m.id}</p> <p>code: ${m.codigo}</p><p>title: ${m.titulo}</p><p>description: ${m.descripcion}</p><p>price: $${m.precio}</p><p>stock: ${m.cantidad}</p><p>category: ${m.categoria}</p><p>status: ${m.estado}</p><button id=${m.id}>x</button></br>`
         
     })
+    // console.log(prod);
     parrafoNuevo.innerHTML = prod 
     const botones = document.querySelectorAll('button')
+    // console.log(botones);
+    
     botones.forEach(boton=>{
         boton.onclick = (e) =>{
             console.log(e.target.id);

@@ -31,7 +31,8 @@ app.set('views',__dirName+'/views')
 //     res.render('index',{titulo: "index"})
 //   })
 
-const productos = []
+let productos = []
+console.log(productos);
 const PORT = 8080
 
 const httpServer = app.listen(PORT,()=>{
@@ -54,10 +55,15 @@ socketServer.on('connection', (socket) => {
     })
 
     socket.on('eliminar', (idRemove)=>{
-        // console.log("Eliminando el item:", idRemove);
-        const newList = [...productos];
-        const newListRemove = newList.filter(item => item.id !== idRemove);
-        console.log(newListRemove.length);
+        console.log("Eliminando el item:", idRemove);
+        let newList = [...productos];
+        // console.log(newList.length);
+        let newListRemove = newList.filter(item => item.id !== idRemove);
+        // console.log(newListRemove.length);
+        // console.log(newListRemove);
+        // console.log(productos);
+        productos = newListRemove
+        console.log(productos);
         socketServer.emit('respuesta', newListRemove)
     })
 
