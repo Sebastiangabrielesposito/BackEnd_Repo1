@@ -12,7 +12,7 @@ const parrafoNuevo = document.getElementById('prod')
 
 function generateUUID() {
     var d = new Date().getTime();
-    var uuid = 'xxxx'.replace(/[xy]/g, function (c) {
+    var uuid = 'xxxxxxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
         var r = (d + Math.random() * 16) % 16 | 0;
         d = Math.floor(d / 16);
         return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
@@ -43,7 +43,7 @@ socketClient.on('respuesta',(mensajes)=>{
     // console.log(prod);
     parrafoNuevo.innerHTML = prod 
     const botones = document.querySelectorAll('button')
-    // console.log(botones);
+    console.log(botones);
     
     botones.forEach(boton=>{
         boton.onclick = (e) =>{
@@ -51,3 +51,4 @@ socketClient.on('respuesta',(mensajes)=>{
         socketClient.emit('eliminar',(e.target.id))}
     })
 })
+
