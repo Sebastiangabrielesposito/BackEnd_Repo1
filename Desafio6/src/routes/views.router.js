@@ -1,6 +1,6 @@
 import { json, Router } from "express";
 import { ProductManager } from "../dao/fileManager/productManager.js";
-import { productManager } from "./products.js";
+import { productManager } from "./products.router.js";
 import { upload } from "../middlewares/multer.js";
 import {
   codeValidator,

@@ -1,42 +1,35 @@
 import { Router } from "express";
 import fs from "fs";
+import { __dirname } from "../utils.js";
 // import CartsManager from "../dao/fileManager/cartsManager.js";
 import CartsManager from "../dao/mongoManager/cartsManager.js";
-import { productManager } from "./products.js";
-import { __dirname } from "../utils.js";
+import { productManager } from "./products.router.js";
 
 const router = Router();
 const cartsManager = new CartsManager(__dirname + "/cart.json");
 const pathJSON = __dirname + "/cart.json";
-console.log(pathJSON);
+// console.log(pathJSON);
 
-router.post("/", async (req, res) => {
-  const products = [];
-  const newCar = await cartsManager.createCar({ products });
-  if (!newCar) {
-    res.json({ message: "Error" });
-  } else {
-    res.json({ mesagge: `Carrito creado con exito`, newCar });
-  }
-  // const { product, quantity } = req.body;
-  // if (!product || !quantity) {
-  //   res.json({ message: "Values required" });
-  // } else {
-  //   const newCar = await cartsManager.createCar({ product, quantity });
-
-  //   if (!newCar) {
-  //     res.json({ message: "Error" });
-  //   } else {
-  //     res.json({ mesagge: `Carrito creado con exito`, newCar });
-  //   }
-  // }
-});
 router.get("/:cid", async (req, res) => {
   const { cid } = req.params;
-  const car = await cartsManager.getCarByid(cid);
+  const car = await (await cartsManager.getCarByid(cid)).populate("products");
   if (car)
     res.status(200).json({ mesagge: `Carrito encontrado con exito`, car });
   else res.status(400).json({ mesagge: "Carrito no existe con ese id" });
+});
+
+router.post("/", async (req, res) => {
+  try {
+    const products = [];
+    const newCart = await cartsManager.createCar({ products });
+    if (!newCart) {
+      res.json({ message: "Error" });
+    } else {
+      res.json({ mesagge: `Carrito creado con exito`, newCart });
+    }
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 router.post("/:cid/product/:pid", async (req, res) => {
@@ -53,7 +46,9 @@ router.post("/:cid/product/:pid", async (req, res) => {
         );
         console.log(prodDuplicado);
         if (prodDuplicado === -1) {
+          console.log(products);
           productos.push({ producto: prod.id, quantity: 1 });
+          cars.save();
           const updatecar = car.id - 1;
           cars.splice(updatecar, 1, car);
           await fs.promises.writeFile(pathJSON, JSON.stringify(cars));
