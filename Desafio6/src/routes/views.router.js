@@ -26,7 +26,7 @@ router.post(
   async (req, res) => {
     try {
       const obj = req.body;
-      const producto = await productManager.getAll(obj);
+      const producto = await productManager.createProduct(obj);
 
       res.render("realtimeproducts", { producto });
       console.log({ mesagge: `Producto creado con exito`, producto });
