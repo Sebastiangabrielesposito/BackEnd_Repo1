@@ -24,13 +24,13 @@ export class ProductManager {
 
   async createProduct(obj) {
     try {
-      const usuariosArchivos = await this.getAll();
+      const productArchivos = await this.getAll();
       let id = await this.#generarId();
-      const usuario = { id, ...obj };
-      usuario.fecha = new Date().toLocaleString();
-      usuariosArchivos.push(usuario);
-      await fs.promises.writeFile(this.path, JSON.stringify(usuariosArchivos));
-      return usuario;
+      const product = { id, ...obj };
+      product.fecha = new Date().toLocaleString();
+      productArchivos.push(product);
+      await fs.promises.writeFile(this.path, JSON.stringify(productArchivos));
+      return product;
     } catch (error) {
       return error;
     }
@@ -50,7 +50,7 @@ export class ProductManager {
   async updateProduct(pid, obj) {
     try {
       const ProductInfo = await this.getAll();
-      const product = ProductInfo.findIndex((p) => p.id === pid);
+      const product = ProductInfo.findIndex((p) => p.id === parseInt(pid));
       const updateProd = { ...ProductInfo[product], ...obj };
       ProductInfo.splice(product, 1, updateProd);
       await fs.promises.writeFile(this.path, JSON.stringify(ProductInfo));

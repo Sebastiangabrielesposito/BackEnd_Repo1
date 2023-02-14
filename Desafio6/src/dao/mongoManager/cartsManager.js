@@ -12,7 +12,6 @@ export default class CartsManager {
 
   async createCar(obj) {
     try {
-      // const obj = [];
       const newCar = await cartsModel.create(obj);
       return newCar;
     } catch (error) {
@@ -22,7 +21,7 @@ export default class CartsManager {
 
   async getCarByid(id) {
     try {
-      const carById = await cartsModel.findById(id);
+      const carById = await cartsModel.findById(id).populate("products");
       return carById;
     } catch (error) {
       console.log(error);
