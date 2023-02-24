@@ -20,7 +20,7 @@ function generateUUID() {
   return uuid;
 }
 
-form.onsubmit = (e) => {
+formulario.onsubmit = (e) => {
   e.preventDefault();
   const codigo = code.value;
   const titulo = title.value;

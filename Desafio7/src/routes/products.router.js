@@ -8,6 +8,7 @@ import {
   productValidator,
   stock0Validator,
 } from "../middlewares/productValidator.js";
+import { productModel } from "../dao/models/products.model.js";
 
 const router = Router();
 
@@ -15,13 +16,76 @@ export const productManager = new ProductManager(__dirname + "/product.json");
 
 router.get("/", async (req, res) => {
   try {
-    const { limit } = req.query;
+    const { limit = 10, page = 1, category } = req.query;
     const prod = await productManager.getAll(limit || "max");
-    //Ejecutar con fileSystem - front de productos
-    // res.render("home", { prod, titulo: "Productos" });
-
-    //Ejecutar con mongo - visualizacion en thunderClient
-    res.json(prod);
+    const productInfo = await productModel.paginate(
+      { category },
+      { limit, page, sort: { price: 1 } }
+    );
+    if (!limit || !page || !category) {
+      //Ejecutar con mongo - visualizacion en thunderClient
+      res.json(prod);
+      //Ejecutar con fileSystem - front de productos
+      // res.render("home", { prod, titulo: "Productos" });
+    } else {
+      if (productInfo.hasPrevPage === false) {
+        if (productInfo.hasNextPage === false) {
+          res.json({
+            status: "exitoso",
+            payload: productInfo.docs,
+            totalPages: productInfo.totalPages,
+            prevPage: productInfo.prevPage,
+            nextPage: productInfo.nextPage,
+            page: productInfo.page,
+            hasPrevPage: productInfo.hasPrevPage,
+            hasNextPage: productInfo.hasNextPage,
+            prevLink: null,
+            nextLink: null,
+          });
+        } else {
+          res.json({
+            status: "exitoso",
+            payload: productInfo.docs,
+            totalPages: productInfo.totalPages,
+            prevPages: productInfo.prevPage,
+            nextPage: productInfo.nextPage,
+            page: productInfo.page,
+            hasPrevPage: productInfo.hasPrevPage,
+            hasNextPage: productInfo.hasNextPage,
+            prevLink: null,
+            nextLink: `localhost:8080/api/products/?page=${productInfo.nextPage}`,
+          });
+        }
+      } else {
+        if (productInfo.hasNextPage === false) {
+          res.json({
+            status: "exitoso",
+            payload: productInfo.docs,
+            totalPages: productInfo.totalPages,
+            prevPage: productInfo.prevPage,
+            nextPage: productInfo.nextPage,
+            page: productInfo.page,
+            hasPrevPage: productInfo.hasPrevPage,
+            hasNextPage: productInfo.hasNextPage,
+            prevLink: `localhost:8080/api/products/?page=${productInfo.prevPage}`,
+            nextLink: null,
+          });
+        } else {
+          res.json({
+            status: "exitoso",
+            payload: productInfo.docs,
+            totalPages: productInfo.totalPages,
+            prevPage: productInfo.prevPage,
+            nextPage: productInfo.nextPage,
+            page: productInfo.page,
+            hasPrevPage: productInfo.hasPrevPage,
+            hasNextPage: productInfo.hasNextPage,
+            prevLink: `localhost:8080/api/products/?page=${productInfo.prevPage}`,
+            nextLink: `localhost:8080/api/products/?page=${productInfo.nextPage}`,
+          });
+        }
+      }
+    }
   } catch (error) {
     console.log(error);
   }

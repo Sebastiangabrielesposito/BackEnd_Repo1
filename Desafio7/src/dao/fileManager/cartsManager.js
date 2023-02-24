@@ -1,5 +1,6 @@
 import fs from "fs";
 import { json } from "express";
+import { log } from "console";
 
 export default class CartsManager {
   constructor(path) {

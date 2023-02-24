@@ -22,6 +22,7 @@ export default class ProductManager {
   async getProductsByid(id) {
     try {
       const productById = await productModel.findById(id);
+      // const productById = await productModel.find({ _id: id });
       return productById;
     } catch (error) {
       console.log(error);
