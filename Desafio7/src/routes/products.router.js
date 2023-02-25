@@ -1,7 +1,7 @@
 import { json, Router } from "express";
 import { __dirname } from "../utils.js";
-// import { ProductManager } from "../dao/fileManager/productManager.js";
-import ProductManager from "../dao/mongoManager/productManager.js";
+import { ProductManager } from "../dao/fileManager/productManager.js";
+// import ProductManager from "../dao/mongoManager/productManager.js";
 import { upload } from "../middlewares/multer.js";
 import {
   codeValidator,
@@ -24,9 +24,9 @@ router.get("/", async (req, res) => {
     );
     if (!limit || !page || !category) {
       //Ejecutar con mongo - visualizacion en thunderClient
-      res.json(prod);
+      // res.json(prod);
       //Ejecutar con fileSystem - front de productos
-      // res.render("home", { prod, titulo: "Productos" });
+      res.render("home", { prod, titulo: "Productos" });
     } else {
       if (productInfo.hasPrevPage === false) {
         if (productInfo.hasNextPage === false) {

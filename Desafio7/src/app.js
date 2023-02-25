@@ -8,6 +8,7 @@ import { productManager } from "./routes/products.router.js";
 import messagesRouter from "./routes/messages.router.js";
 import viewsRouter from "./routes/views.router.js";
 import "./dbConfig.js";
+import camposRouter from "./routes/campos.router.js";
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use("/api/products", productsRouter);
 app.use("/api/carts", cartsRouter);
 app.use("/messages", messagesRouter);
 app.use("/realtimeproducts", viewsRouter);
+app.use("/campos", camposRouter);
 
 //Handlebars
 app.engine("handlebars", handlebars.engine());

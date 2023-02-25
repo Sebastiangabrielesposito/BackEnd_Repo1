@@ -26,10 +26,14 @@ export const productValidator = (req, res, next) => {
     !producto.status ||
     producto.status === "false";
   console.log(producto.status);
-  if (prodValidator) res.send("Debes rellenar los campos correctamente");
-  else next();
-  // if (prodValidator) res.redirect("/campos");
+  // if (prodValidator) res.send("Debes rellenar los campos correctamente");
   // else next();
+
+  if (prodValidator) {
+    res.redirect("/campos");
+  } else {
+    next();
+  }
 };
 
 export const stock0Validator = (req, res, next) => {

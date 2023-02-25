@@ -45,7 +45,9 @@ formulario.onsubmit = (e) => {
 socket.on("respuesta", (mensajes) => {
   let prod = "";
   mensajes.forEach((m) => {
-    prod += `<p>id: ${m.id}</p> <p>code: ${m.codigo}</p><p>title: ${m.titulo}</p><p>description: ${m.descripcion}</p><p>price: $${m.precio}</p><p>stock: ${m.cantidad}</p><p>category: ${m.categoria}</p><p>status: ${m.estado}</p><button id=${m.id}>x</button></br>`;
+    prod += `<p style="color: silver;text-align: center;font-family: cursive;">id: ${m.id}</p> <p style="color: silver;text-align: center;font-family: cursive;">code: ${m.codigo}</p><p style="color: silver;text-align: center;font-family: cursive;">title: ${m.titulo}</p><p style="color: silver;text-align: center;font-family: cursive;">description: ${m.descripcion}</p><p style="color: silver;text-align: center;font-family: cursive;">price: $${m.precio}</p><p style="color: silver;text-align: center;font-family: cursive;">stock: ${m.cantidad}</p><p style="color: silver;text-align: center;font-family: cursive;">category: ${m.categoria}</p><p style="color: silver;text-align: center;font-family: cursive;">status: ${m.estado}</p><div style="text-align: center;">
+  <button style="color:red;font-family: cursive;" id=${m.id}>x</button>
+</div></br>`;
   });
   // console.log(prod);
   parrafoNuevo.innerHTML = prod;
