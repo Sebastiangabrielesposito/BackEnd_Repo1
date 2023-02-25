@@ -22,7 +22,7 @@ formulario.onsubmit = (e) => {
 socket.on("respuesta1", (mensajes) => {
   let info = "";
   mensajes.forEach((m) => {
-    info += `El usuario ${m.user} dice: ${m.message} </br>`;
+    info += `<p style="color: silver;text-align: center;font-family: cursive;font-size: 20px; ">El usuario ${m.user} dice: ${m.message} </p></br>`;
   });
   parrafo.innerHTML = info;
 });
