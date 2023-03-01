@@ -1,10 +1,30 @@
 import { productModel } from "../models/products.model.js";
 
 export default class ProductManager {
-  async getAll() {
+  async getAll(options) {
     try {
-      const product = productModel.find({});
-      return product;
+      const { limit = 10, page = 1, category, sort } = options || {};
+      const skip = (page - 1) * limit;
+      // const query = category ? { category } : {};
+      const query = category
+        ? { category: { $regex: category, $options: "i" } }
+        : {};
+      // const sortQuery = sort === "asc" ? { price: -1 } : { price: 1 };
+      const sortQuery = {};
+      if (sort) {
+        const [field, direction] = sort.split(":");
+        sortQuery[field] = direction === "asc" ? -1 : 1;
+      } else {
+        sortQuery.price = 1;
+      }
+      const products = await productModel
+        .find(query)
+        .skip(skip)
+        .limit(Number(limit))
+        // .sort({ price: 1 })
+        .sort(sortQuery)
+        .lean();
+      return products;
     } catch (error) {
       console.log(error);
     }

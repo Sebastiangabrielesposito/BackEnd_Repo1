@@ -6,17 +6,18 @@ export class ProductManager {
     this.path = path;
   }
 
-  async getAll(limit) {
+  async getAll(options) {
     try {
       if (fs.existsSync(this.path)) {
-        const ProductInfo = await fs.promises.readFile(this.path, "utf-8");
-        if (limit === "max") {
-          const ProductInfoJs = JSON.parse(ProductInfo);
-          return ProductInfoJs;
-        } else {
-          return JSON.parse(ProductInfo).slice(0, limit);
+        const products = await fs.promises.readFile(this.path, "utf-8");
+        const parsedProducts = JSON.parse(products);
+        if (!options || !options.limit) {
+          return parsedProducts;
         }
-      } else return [];
+        return parsedProducts.slice(0, options.limit);
+      } else {
+        return [];
+      }
     } catch (error) {
       console.log(error);
     }
