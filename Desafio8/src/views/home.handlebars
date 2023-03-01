@@ -1,0 +1,27 @@
+<div style="display: flex;justify-content: center;margin-bottom:70px;margin-top: 20px;;gap:800px;">
+    <h2 style="color: silver;text-align: center;margin: 0;font-family: cursive;font-size:25px">Bienvenido  {{email}}
+    </h2>
+    <button onclick="location.href='/users/logout'"
+        style="border-radius: 8px;height: 25px;width: 100px;background-color: #000;color: rgb(252, 2, 2);cursor: pointer;font-family: cursive;margin-top: 15px;">Logout</button>
+</div>
+
+
+<h1 style="color: rgb(212, 14, 107);text-align: center;margin: 5px 0;margin-bottom: 40px;font-family: cursive;font-size: 40px;background: #000;">Productos</h1>
+
+
+<div class="product-gallery">
+    {{#each prod}}
+    <div class="product-container">
+        <div class="product-image" style="background-image: url({{thumbnails}})"></div>
+        <div class="product-details">
+            <h3>{{title}}</h3>
+            <p>{{description}}</p>
+            <p>Precio: ${{price}}</p>
+            <p>Categoria: {{category}}</p>
+            <p>Stock: {{stock}}</p>
+            {{!-- <p>Status: {{status}}</p>
+            <p>Fecha de carga: {{fecha}}</p> --}}
+        </div>
+    </div>
+    {{/each}}
+</div>

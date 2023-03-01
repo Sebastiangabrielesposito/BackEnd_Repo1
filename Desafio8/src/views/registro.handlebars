@@ -1,0 +1,18 @@
+<h1 style="color: silver;text-align: center;margin: 25px 0;font-family: cursive;font-size: 45px;">Registro</h1>
+<div style="display: flex;justify-content: center;margin-top: 20px;">
+    <form action="/users/registro" method="post" style="display: flex;justify-content: center;margin-top: 20px;flex-direction: column; gap: 10px;width: 250px;">
+        <input type="text" name="first_name" id="first_name" placeholder="Ingresa tu nombre"  style="border-radius: 8px;height: 22px;background-color: #000;color: rgb(252, 2, 2);">
+        <input type="text" name="last_name" id="last_name" placeholder="Ingresa tu apellido" style="border-radius: 8px;height: 22px;background-color: #000;color: rgb(252, 2, 2);">
+        <input type="email" name="email" id="email" placeholder="Ingresa tu email" style="border-radius: 8px;height: 22px;background-color: #000;color: rgb(252, 2, 2);">
+        <input type="number" name="age" id="age" placeholder="Ingresa tu edad"  style="border-radius: 8px;height: 22px;background-color: #000;color: rgb(252, 2, 2);">
+        <input type="password" name="password" id="password" placeholder="Ingresa tu password"  style="border-radius: 8px;height: 22px;background-color: #000;color: rgb(252, 2, 2);">
+        <div style="display:flex;justify-content:center;margin-top: 10px;">
+            <input type="submit" value="Crear" style="border-radius: 8px;height: 25px;width: 100px;background-color: #000;color: rgb(252, 2, 2);cursor: pointer;font-family: cursive;border-color: gray;">
+        </div>
+    </form>
+</div>    
+<div style="display: flex;justify-content: center;margin-top: 80px;">
+    <button type="submit" onclick="location.href='/views/login'"
+        style="border-radius: 8px;height: 25px;width: 100px;background-color: #000;color: rgb(252, 2, 2);cursor: pointer;font-family: cursive;">Ir
+        a login</button>
+</div>

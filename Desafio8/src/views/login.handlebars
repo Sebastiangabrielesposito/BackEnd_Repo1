@@ -1,0 +1,18 @@
+<h2 style="color: silver;text-align: center;margin: 25px 0;font-family: cursive;font-size: 45px;">Login</h2>
+
+<div style="display: flex;justify-content: center;">
+    <form action="/users/login" method="post" style="display: flex;justify-content: center;flex-direction: column; gap: 14px;margin-top: 7px;">
+        <input style="border-radius: 8px;height: 22px;background-color: #000;color: rgb(252, 2, 2);cursor: pointer;font-family: cursive;" type="email" name="email" id="email" placeholder="Ingresa tu email..." required>
+        <input style="border-radius: 8px;height: 22px;background-color: #000;color: rgb(252, 2, 2);cursor: pointer;font-family: cursive;" type="password" name="password" id="password" placeholder="Ingresa tu password..." required>
+        <div style="display:flex;justify-content:center;margin-top: 3px;">
+            <input style="border-radius: 5px;height: 25px;width: 100px;background-color: #000;color: rgb(252, 2, 2);cursor: pointer;font-family: cursive;border-color: grey;" type="submit" value="Ingresar">
+        </div>
+    </form>    
+</div>
+
+<h2 style="color: silver;text-align: center;margin-top:100px;font-family: cursive;font-size: 40px;">Usuario nuevo?</h2>
+<div style="display: flex;justify-content: center;margin-top: 20px;">
+    <button type="submit" onclick="location.href='/views/registro'"
+        style="border-radius: 8px;height: 25px;width: 100px;background-color: #000;color: rgb(252, 2, 2);cursor: pointer;font-family: cursive;">Ir
+        a registro</button>
+</div>

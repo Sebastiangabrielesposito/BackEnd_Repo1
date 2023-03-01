@@ -1,0 +1,20 @@
+<h1 style="color: silver;text-align: center;margin-top: 40px ;font-family: cursive;font-size: 45px;">Messages</h1>
+<div style="display: flex;justify-content: center;margin-top: 30px;">
+    <form action="/messages" method="post" id="formulario" style="display: flex;justify-content: center;flex-direction: column; gap: 10px;width: 250px;">
+        <input type="email" name="user" id="user"  placeholder="user" style="border-radius: 8px;height: 22px;background-color: #000;color: rgb(252, 2, 2);">
+        <input type="text" name="message" id="message" placeholder="messages" style="border-radius: 8px;height: 22px;background-color: #000;color: rgb(252, 2, 2);">
+        <div style="display:flex;justify-content:center;margin-top: 15px;">
+            <button type="submit" style="border-radius: 8px;height: 25px;width: 70px;background-color: #000;color: rgb(252, 2, 2);cursor: pointer;font-family: cursive;margin-left:10px;border-color: silver;">Enviar</button>
+        </div>
+    </form>
+</div>
+<p id="parrafo" ></p>
+
+<div style="display: flex;justify-content: center;margin-top: 100px;">
+    <button type="submit" onclick="location.href='/views/login'"
+        style="border-radius: 8px;height: 25px;width: 100px;background-color: #000;color: rgb(252, 2, 2);cursor: pointer;font-family: cursive;">Ir
+        a login</button>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="messages.js"></script>
