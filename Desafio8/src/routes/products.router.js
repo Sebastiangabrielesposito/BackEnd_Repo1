@@ -17,7 +17,7 @@ export const productManager = new ProductManager(__dirname + "/product.json");
 
 router.get("/", auth, async (req, res) => {
   try {
-    const { limit = 10, page = 1, category, sort } = req.query;
+    const { limit = 12, page = 1, category, sort } = req.query;
     const options = { limit, page, category };
     console.log(req.session.email);
     if (sort) {

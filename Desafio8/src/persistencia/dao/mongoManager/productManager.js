@@ -3,7 +3,7 @@ import { productModel } from "../models/products.model.js";
 export default class ProductManager {
   async getAll(options) {
     try {
-      const { limit = 10, page = 1, category, sort } = options || {};
+      const { limit = 12, page = 1, category, sort } = options || {};
       const skip = (page - 1) * limit;
       // const query = category ? { category } : {};
       const query = category

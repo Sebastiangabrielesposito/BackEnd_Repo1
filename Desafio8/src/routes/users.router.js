@@ -53,9 +53,9 @@ router.post("/registro", async (req, res) => {
     res.redirect("/views/errorRegistro");
   } else {
     await usersModel.create(req.body);
-    // for (const key in req.body) {
-    //   req.session[key] = req.body[key];
-    // }
+    for (const key in req.body) {
+      req.session[key] = req.body[key];
+    }
     res.redirect("/views/login");
   }
 });
@@ -67,7 +67,7 @@ router.post("/login", async (req, res) => {
       req.session[key] = req.body[key];
     }
     req.session.logged = true;
-    if (email === "adminCoder" && password === "adminCod3r123") {
+    if (email === "adminCoder@hotmail.com" && password === "adminCod3r123") {
       req.session.isAdmin = true;
       console.log(req.session.isAdmin);
     } else {
