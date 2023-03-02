@@ -48,19 +48,20 @@ console.log(users);
 //Mongo
 router.post("/registro", async (req, res) => {
   const { email, password } = req.body;
-  const existeUsuario = usersModel.find({ email, password });
-  console.log(existeUsuario);
-  if (!existeUsuario) {
+  const existeUsuario = await usersModel.findOne({ email });
+  if (existeUsuario) {
     res.redirect("/views/errorRegistro");
   } else {
     await usersModel.create(req.body);
+    // for (const key in req.body) {
+    //   req.session[key] = req.body[key];
+    // }
     res.redirect("/views/login");
   }
 });
 router.post("/login", async (req, res) => {
-  // console.log(users);
   const { email, password } = req.body;
-  const usuario = await usersModel.find({ email, password });
+  const usuario = await usersModel.findOne({ email, password });
   if (usuario) {
     for (const key in req.body) {
       req.session[key] = req.body[key];

@@ -1,7 +1,7 @@
 import { json, Router } from "express";
 import { __dirname } from "../utils.js";
-import { ProductManager } from "../persistencia/dao/fileManager/productManager.js";
-// import ProductManager from "../persistencia/dao/mongoManager/productManager.js";
+// import { ProductManager } from "../persistencia/dao/fileManager/productManager.js";
+import ProductManager from "../persistencia/dao/mongoManager/productManager.js";
 import { upload } from "../middlewares/multer.js";
 import {
   codeValidator,
@@ -19,11 +19,14 @@ router.get("/", auth, async (req, res) => {
   try {
     const { limit = 10, page = 1, category, sort } = req.query;
     const options = { limit, page, category };
+    console.log(req.session.email);
     if (sort) {
       options.sort = sort;
     }
     const products = await productManager.getAll(options);
     if (!limit || !page || !category) {
+      // console.log(products);
+      // res.json({ products });
       res.render("home", {
         prod: products,
         titulo: "Productos",
@@ -65,10 +68,12 @@ router.get("/:pid", async (req, res) => {
   try {
     const { pid } = req.params;
     const product = await productManager.getProductsByid(pid);
+    console.log(product);
     if (product)
       res
         .status(200)
         .json({ mesagge: `Producto encontrado con exito`, product });
+    // res.render("productHome", { product });
     else res.status(400).json({ mesagge: "Producto no existe con ese id" });
   } catch (error) {
     console.log(error);
