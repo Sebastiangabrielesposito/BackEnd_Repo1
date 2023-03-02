@@ -42,24 +42,10 @@ let mensajes = [];
 // console.log(mensajes);
 
 //session fileStore
-app.use(
-  session({
-    store: new fileStore({
-      path: __dirname + "/session",
-    }),
-    resave: false,
-    saveUninitialized: false,
-    secret: "sessionKey",
-    cookie: { maxAge: 1160000 },
-  })
-);
-
-//session mongo
 // app.use(
 //   session({
-//     store: new mongoStore({
-//       mongoUrl:
-//         "mongodb+srv://ecommerce-Coder:46583954@coderdatabase.bwdyham.mongodb.net/mongoSession45?retryWrites=true&w=majority",
+//     store: new fileStore({
+//       path: __dirname + "/session",
 //     }),
 //     resave: false,
 //     saveUninitialized: false,
@@ -67,6 +53,20 @@ app.use(
 //     cookie: { maxAge: 60000 },
 //   })
 // );
+
+//session mongo
+app.use(
+  session({
+    store: new mongoStore({
+      mongoUrl:
+        "mongodb+srv://ecommerce-Coder:46583954@coderdatabase.bwdyham.mongodb.net/ecommerce?retryWrites=true&w=majority",
+    }),
+    resave: false,
+    saveUninitialized: false,
+    secret: "sessionKey",
+    cookie: { maxAge: 60000 },
+  })
+);
 
 //routes
 app.use("/api/products", productsRouter);
