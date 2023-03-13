@@ -1,0 +1,46 @@
+<h1 style="
+        text-align: center;
+        color: silver;
+        font-family: cursive;
+        margin: 40px 0 ;
+        font-size: 40px;
+        color:rgb(212, 14, 107);
+        background: #000;
+      ">
+    Agregar producto
+</h1>
+<div style="
+        display: flex;
+        justify-content: center;
+        padding: 8px;
+        margin: 20px 0;
+      ">
+    <form action="/api/products" method="post" style="
+          display: flex;
+          flex-direction: column;
+          width: 300px;
+          color: silver;
+          font-weight: 500;
+          gap: 10px;width: 250px;
+          
+        " enctype="multipart/form-data">
+        <input type="text" name="code" id="code" placeholder="code" style="border-radius: 8px;height: 22px;background-color: #000;color: rgb(252, 2, 2);"/> 
+        <input type="text" name="title" id="title" placeholder="title" style="border-radius: 8px;height: 22px;background-color: #000;color: rgb(252, 2, 2);"/>
+        <input type="text" name="description" id="description" placeholder="description" style="border-radius: 8px;height: 22px;background-color: #000;color: rgb(252, 2, 2);"/>
+        <input type="number" name="price" id="price" placeholder="price"/style="border-radius: 8px;height: 22px;background-color: #000;color: rgb(252, 2, 2);"><input type="number" name="stock" id="stock" placeholder="stock" style="border-radius: 8px;height: 22px;background-color: #000;color: rgb(252, 2, 2);"/>
+        <input type="text" name="category" id="category" placeholder="category" style="border-radius: 8px;height: 22px;background-color: #000;color: rgb(252, 2, 2);"/>
+        <input type="text" name="status" id="status" placeholder="status" style="border-radius: 8px;height: 22px;background-color: #000;color: rgb(252, 2, 2);"/> 
+        <input type="text" name="thumbnails"
+            id="thumbnails" placeholder="thumbnails" style="border-radius: 8px;height: 22px;background-color: #000;color: rgb(252, 2, 2);"/>
+        <input type="file" name="file" style="border-radius: 58px;height: 22px;background-color: #000;color: rgb(252, 2, 2);margin-top: 5px;"  required />
+        <div style="display:flex;justify-content:center;margin-top: 10px;">
+          <input type="submit" value="Crear"
+            style="border-radius: 8px;height: 25px;width: 100px;background-color: #000;color: rgb(252, 2, 2);cursor: pointer;font-family: cursive;border-color: gray;">
+        </div>
+    </form>
+</div>
+    <div style="display: flex;justify-content: center;margin-top: 40px;">
+      <button type="submit" onclick="location.href='/views/login'"
+        style="border-radius: 8px;height: 25px;width: 100px;background-color: #000;color: rgb(252, 2, 2);cursor: pointer;font-family: cursive;">Ir
+        a login</button>
+    </div>
