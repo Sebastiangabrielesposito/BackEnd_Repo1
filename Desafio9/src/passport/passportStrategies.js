@@ -28,7 +28,8 @@ passport.use(
   )
 );
 
-// //passport - Github
+//passport - Github
+//Login
 passport.use(
   "github",
   new GithubStrategy(
@@ -48,7 +49,7 @@ passport.use(
     }
   )
 );
-
+//Registro
 passport.use(
   "githubRegistro",
   new GithubStrategy(
@@ -77,8 +78,9 @@ passport.use(
 
 //Google passport
 const email = ['elarka1989@gmail.com']
+// Login
 passport.use(
-  "google",
+  "googleLogin",
   new GoogleStrategy(
     {
       clientID:
@@ -92,12 +94,42 @@ passport.use(
       if (!usuario) {
         done("El usuario no existe", null);
       } else {
-        email.push(profile.emails[0].value)
+        // email.push( profile._json.email)
         done(null, usuario);
       }
     }
   )
 );
+
+//Registro
+passport.use(
+  "googleRegistro",
+  new GoogleStrategy(
+    {
+      clientID:
+        "1048782058683-14omnstks4peutrbpph1bu2m1pau7erl.apps.googleusercontent.com",
+      clientSecret: "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",
+      callbackURL: "http://localhost:8080/users/registro",
+    },
+    async (accessToken, refreshToken, profile, done) => {
+      // console.log(profile);
+      const usuario = await usersModel.findOne({ email: profile._json.email });
+      if (!usuario) {
+        const nuevoUsuario = {
+          first_name: profile._json.name.split(" ")[0],
+          last_name: profile._json.name.split(" ")[1] || " ",
+          email: profile._json.email,
+          password: ' ',
+        };
+        const dbResultado = await usersModel.create(nuevoUsuario);
+        done(null, dbResultado);
+      } else {
+        done(null, usuario);
+      }
+    }
+  )
+);
+
 
 // //passport/jwt
 // passport.use('jwt', new jwtStrategy({
@@ -122,7 +154,7 @@ passport.use(
 //   done(null,jwtPayLoad.user)
 //   }))
 
-//setting passport - debe colocarse siempre
+//settings passport - debe colocarse siempre
 passport.serializeUser((usuario, done) => {
   done(null, usuario._id);
 });

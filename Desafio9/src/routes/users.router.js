@@ -170,17 +170,38 @@ router.get(
   }
 );
 
-//Login ocn Gmail
+//Login con Gmail
 
 router.get(
   "/loginGoogle",
-  passport.authenticate("google", { scope: ['https://www.googleapis.com/auth/userinfo.email',
+  passport.authenticate("googleLogin", { scope: ['https://www.googleapis.com/auth/userinfo.email',
   'https://www.googleapis.com/auth/userinfo.profile'] })
 );
 
 router.get(
   "/google",
-  passport.authenticate("google", {
+  passport.authenticate("googleLogin", {
+    failureRedirect: "/views/errorLogin",
+  }),
+  async (req, res) => {
+    req.session.logged = true;
+    req.session.email = req.user.email;
+    // console.log(req);
+    res.redirect("/api/products");
+  }
+);
+
+
+//Registro y Login Google
+router.get(
+  "/registroGoogle",
+  passport.authenticate("googleRegistro", { scope: ['https://www.googleapis.com/auth/userinfo.email',
+  'https://www.googleapis.com/auth/userinfo.profile'] })
+);
+
+router.get(
+  "/registro",
+  passport.authenticate("googleRegistro", {
     failureRedirect: "/views/errorLogin",
   }),
   async (req, res) => {
