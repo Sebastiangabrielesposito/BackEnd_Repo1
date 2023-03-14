@@ -6,6 +6,7 @@ import { Strategy as GithubStrategy } from "passport-github2";
 import { ExtractJwt, Strategy as jwtStrategy } from "passport-jwt";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 
+
 //passport local
 passport.use(
   "registro",
@@ -131,29 +132,36 @@ passport.use(
 );
 
 
-// //passport/jwt
-// passport.use('jwt', new jwtStrategy({
-//   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-//   secretOrKey: 'secretJwt'
-// },async(jwtPayLoad,done)=>{
-//   console.log('---jwtPayLoad',jwtPayLoad);
-//   done(null,jwtPayLoad.user)
-// }))
+//passport Token jwt // LocalStorage
+passport.use('jwt', new jwtStrategy({
+  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+  secretOrKey: 'secretJwt'
+},async(jwtPayLoad,done)=>{
+  console.log('---jwtPayLoad',jwtPayLoad);
+  done(null,jwtPayLoad.user)
+}))
 
-// //passport token en cookies
-// const cookieExtractor = (req)=>{
-//   const token = req?.cookies?.token
-//   return token
-// }
 
-// passport.use('jwtCookies', new jwtStrategy({
-//   jwtFromRequest: ExtractJwt.fromExtractors([cookieExtractor]),
-//   secretOrKey: 'secretJwt'
-// },async(jwtPayLoad,done)=>{
-//   console.log('---jwtPayLoad',jwtPayLoad);
-//   done(null,jwtPayLoad.user)
-//   }))
 
+
+//funcion creada para usar en passport token en cookies
+const cookieExtractor = (req)=>{
+    const token = req?.cookies?.token
+    return token
+  }
+  
+//passport token en cookies
+passport.use('jwtCookies', new jwtStrategy({
+  jwtFromRequest: ExtractJwt.fromExtractors([cookieExtractor]),
+  secretOrKey: 'secretJwt'
+},async(jwtPayLoad,done)=>{
+  console.log('---jwtPayLoad',jwtPayLoad);
+  done(null,jwtPayLoad.user)
+  }))
+
+
+
+  
 //settings passport - debe colocarse siempre
 passport.serializeUser((usuario, done) => {
   done(null, usuario._id);

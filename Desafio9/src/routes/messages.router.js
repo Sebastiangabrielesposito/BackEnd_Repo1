@@ -7,7 +7,7 @@ const router = Router();
 const messagesManager = new MessagesManager();
 
 router.get("/", async (req, res) => {
-  res.render("chat");
+  res.render("chat", {email: req.session.email});
 
   //Ejecutar para visualizar en thunderClient
   // const userMessage = await messagesManager.getAll();

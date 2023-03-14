@@ -21,4 +21,8 @@ router.get("/addProducts", async (req, res) => {
 router.get('/changePassword', (req,res)=>{
   res.render('changePassword', {titulo: "ChangePassword"})
 })
+router.get('/jwtFront', (req,res)=>{
+  res.render('jwt')
+})
+
 export default router;
