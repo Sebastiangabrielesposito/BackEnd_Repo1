@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import config from '../config.js'
 
 export function jwtValidation(req, res, next) {
   try{
@@ -10,7 +11,8 @@ export function jwtValidation(req, res, next) {
       : req.cookies.token;
   
     console.log(token);
-    const isValid = jwt.verify(token, "secretJwt");
+    const isValid = jwt.verify(token, config.SECRET_KEY);
+    // 'secretJwt'
     if (isValid) {
       console.log(isValid);
       req.user = isValid.user;

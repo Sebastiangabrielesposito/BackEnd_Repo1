@@ -5,6 +5,7 @@ import { hashPassword, comparePasswords } from "../utils.js";
 import { Strategy as GithubStrategy } from "passport-github2";
 import { ExtractJwt, Strategy as jwtStrategy } from "passport-jwt";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
+import config from '../config.js'
 
 //passport local Registro
 passport.use(
@@ -52,7 +53,8 @@ passport.use(
         if(!userDB) return done(null,false)
         const compareNewPasswords = await comparePasswords(password,userDB.password)
         if(!compareNewPasswords) return done(null,false)
-        if (email === "adminCoder@hotmail.com" && password === "adminCod3r123") {
+        if (email === "adminCoder@hotmail.com" && password === config.ADMIN_KEY) {
+          // 'adminCod3r123'
           req.session.isAdmin = true;
           console.log(req.session.isAdmin);
         } else {
@@ -182,7 +184,8 @@ passport.use(
   new jwtStrategy(
     {
       jwtFromRequest: ExtractJwt.fromExtractors([cookieExtractor]),
-      secretOrKey: "secretJwt",
+      secretOrKey: config.SECRET_KEY,
+      // 'secretJwt'
     },
     async (jwtPayLoad, done) => {
       

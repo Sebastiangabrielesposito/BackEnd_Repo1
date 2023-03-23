@@ -13,7 +13,7 @@ import cookieParser from "cookie-parser";
 import { __dirname } from "./utils.js";
 import { Server } from "socket.io";
 import "./persistencia/dbConfig.js";
-
+import config from './config.js'
 
 //passport
 import passport from "passport";
@@ -65,8 +65,8 @@ let mensajes = [];
 app.use(
   session({
     store: new mongoStore({
-      mongoUrl:
-        "mongodb+srv://ecommerce-Coder:46583954@coderdatabase.bwdyham.mongodb.net/ecommerce?retryWrites=true&w=majority",
+      mongoUrl:config.URL_MONGO
+      // 'mongodb+srv://ecommerce-Coder:46583954@coderdatabase.bwdyham.mongodb.net/ecommerce?retryWrites=true&w=majority'
     }),
     resave: false,
     saveUninitialized: false,
@@ -92,7 +92,7 @@ app.get("/", (req, res) => {
   res.redirect("/views/login");
 });
 
-const PORT = 8080;
+const PORT = config.PORT || 8080
 
 const httpServer = app.listen(PORT, () => {
   console.log(`Escuchando al puerto ${PORT}`);
