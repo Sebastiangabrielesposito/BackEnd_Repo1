@@ -1,0 +1,30 @@
+<h2 style="color:silver;text-align: center;font-family: cursive;margin: 40px 0 ;font-size: 45px;">RealTimeProducts</h2>
+
+
+<h1 style="text-align: center; color:rgb(212, 14, 107);background: #000;font-family: cursive;">Agregar producto</h1>
+<div style="display: flex; justify-content: center; padding: 5px; ">
+    <form action="realtimeproducts" method="post" style="display: flex;justify-content: center;margin-top: 2px;flex-direction: column; gap: 10px;width: 250px;" enctype="multipart/form-data" id="form">
+        <input type="text" name="code" id="code" placeholder="code"  style="border-radius: 8px;height: 22px;background-color: #000;color: rgb(252, 2, 2);" >
+        <input type="text" name="title" id="title" placeholder="title"  style="border-radius: 8px;height: 22px;background-color: #000;color: rgb(252, 2, 2);">
+        <input type="text" name="description" id="description" placeholder="description"  style="border-radius: 8px;height: 22px;background-color: #000;color: rgb(252, 2, 2);">
+        <input type="number" name="price" id="price" placeholder="price"  style="border-radius: 8px;height: 22px;background-color: #000;color: rgb(252, 2, 2);">
+        <input type="number" name="stock" id="stock" placeholder="stock"  style="border-radius: 8px;height: 22px;background-color: #000;color: rgb(252, 2, 2);">
+        <input type="text" name="category" id="category" placeholder="category"  style="border-radius: 8px;height: 22px;background-color: #000;color: rgb(252, 2, 2);">
+        <input type="text" name="status" id="status" placeholder="status"  style="border-radius: 8px;height: 22px;background-color: #000;color: rgb(252, 2, 2);">
+        {{!-- thumbnails: <input type="text" name="thumbnails" id="thumbnails" >
+        File: <input type="file" name="file" style="margin: 10px 0;"required> --}}
+        <div style="display:flex;justify-content:center;margin: 15px 0; ">
+            <input type="submit" value="Crear" style="border-radius: 8px;height: 25px;width: 100px;background-color: #000;color: rgb(252, 2, 2);cursor: pointer;font-family: cursive;" >
+        </div>
+    </form>
+</div>
+<p id="prod"></p>
+
+<div style="display: flex;justify-content: center;margin-top: 20px;">
+    <button type="submit" onclick="location.href='/views/login'"
+        style="border-radius: 8px;height: 25px;width: 100px;background-color: #000;color: rgb(252, 2, 2);cursor: pointer;font-family: cursive;">Ir
+        a login</button>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/realTimeProducts.js"></script>
