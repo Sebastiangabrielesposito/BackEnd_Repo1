@@ -56,7 +56,7 @@ export async function createCar(req, res) {
     const product = [];
     const newCar = await createOneCar({product});
 
-    // const newCar = await createOneCar({ product: [] });
+    const newCar = await createOneCar({ product: [] });
     if (!newCar) {
       res.status(400).json({ message: "Error" });
     } 
