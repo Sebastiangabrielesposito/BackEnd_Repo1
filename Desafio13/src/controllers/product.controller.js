@@ -8,7 +8,8 @@ import {
 import { json } from "express";
 import { productModel } from "../persistencia/DAOs/mongoDB/models/products.model.js";
 import {mocksProducts} from '../utils/mocks.js';
-
+import CustomError from "../utils/errors/CustomError.js";
+import {ProductErrorNames, ProductErrorMessages, ProductErrorCauses} from '../utils/errors/errors.enum.js';
 
 
 export async function productsAll(req, res) {
@@ -56,9 +57,14 @@ export async function productsAll(req, res) {
       });
     }
   } catch (error) {
-    res.status(500).json({ error });
+      CustomError.createCustomError({
+        name: ProductErrorNames.GET_PRODUCT_ERROR,
+        message: ProductErrorMessages.GET_PRODUCT_ERROR,
+        cause: ProductErrorCauses.GET_PRODUCT_ERROR,
+      })  
   }
 }
+
 
 export async function productId(req, res) {
   try {
@@ -71,7 +77,11 @@ export async function productId(req, res) {
         res.status(400).json({ message: "Product does not exist with that id" });
     }
   } catch (error) {
-    res.status(500).json({ error });
+    CustomError.createCustomError({
+      name: ProductErrorNames.GET_PRODUCT_ERROR,
+      message: ProductErrorMessages.GET_PRODUCT_ERROR,
+      cause: ProductErrorCauses.GET_PRODUCT_ERROR,
+    })  
   }
 }
 
@@ -89,7 +99,11 @@ export async function prodCreate(req,res){
             res.status(400).json({message:'Error creating the product'})
         }
     }catch(error){
-        res.status(500).json({error})
+        CustomError.createCustomError({
+          name: ProductErrorNames.CREATE_PRODUCT_ERROR,
+          message: ProductErrorMessages.CREATE_PRODUCT_ERROR,
+          cause: ProductErrorCauses.CREATE_PRODUCT_ERROR,
+        }) 
     }
 }
 
@@ -104,7 +118,11 @@ export async function prodUpdate(req,res){
             res.status(400).json({message:'Error when modifying the product'})
         }
     }catch(error){
-        res.status(500).json({error})
+        CustomError.createCustomError({
+          name: ProductErrorNames.UPDATE_PRODUCT_ERROR,
+          message: ProductErrorMessages.UPDATE_PRODUCT_ERROR,
+          cause: ProductErrorCauses.UPDATE_PRODUCT_ERROR,
+        })  
     }
 }
 
@@ -118,7 +136,11 @@ export async function prodDelete(req,res){
             res.status(400).json({message:'There is no product with that id'})
         }
     }catch(error){
-        res.status(500).json({error})
+        CustomError.createCustomError({
+          name: ProductErrorNames.DELETE_PRODUCT_ERROR,
+          message: ProductErrorMessages.DELETE_PRODUCT_ERROR,
+          cause: ProductErrorCauses.DELETE_PRODUCT_ERROR,
+        })  
     }
 }
 export async function mockingProducts(req,res){
@@ -127,6 +149,10 @@ export async function mockingProducts(req,res){
     res.json({ products: products })
 
   }catch(error){
-    res.status(500).json({error})
+    CustomError.createCustomError({
+      name: ProductErrorNames.CREATE_PRODUCT_ERROR,
+      message: ProductErrorMessages.CREATE_PRODUCT_ERROR,
+      cause: ProductErrorCauses.CREATE_PRODUCT_ERROR,
+    }) 
   }
 } 

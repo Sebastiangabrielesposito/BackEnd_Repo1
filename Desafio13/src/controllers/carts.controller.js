@@ -11,6 +11,9 @@ import {
 } from "../services/carts.service.js";
 import { productById } from "../services/product.service.js";
 import { usersModel } from "../persistencia/DAOs/mongoDB/models/users.model.js";
+import CustomError from '../utils/errors/CustomError.js';
+import {CartErrorNames, CartErrorMessages, CartErrorCauses} from '../utils/errors/errors.enum.js';
+
 
 export async function CartAll(req, res) {
   try {
@@ -21,7 +24,11 @@ export async function CartAll(req, res) {
       res.status(200).json({ message: "Cars Found", cars });
     }
   } catch (error) {
-    res.status(500).json({ error });
+    CustomError.createCustomError({
+      name: CartErrorNames.GET_CART_ERROR,
+      message: CartErrorMessages.GET_CART_ERROR,
+      cause: CartErrorCauses.GET_CART_ERROR,
+    })  
   }
 }
 
@@ -35,7 +42,11 @@ export async function CarById(req, res) {
       res.status(400).json({ message: "Cart does not exist with that id" });
     }
   } catch (error) {
-    res.status(500).json({ error });
+    CustomError.createCustomError({
+      name: CartErrorNames.GET_CART_ERROR,
+      message: CartErrorMessages.GET_CART_ERROR,
+      cause: CartErrorCauses.GET_CART_ERROR,
+    })  
   }
 }
 export async function createCar(req, res) {
@@ -61,7 +72,11 @@ export async function createCar(req, res) {
     
     res.status(200).json({ message: "Cart created and associated to user", newCar })
   } catch (error) {
-    res.status(500).json({ error });
+    CustomError.createCustomError({
+      name: CartErrorNames.CREATE_CART_ERROR,
+      message: CartErrorMessages.CREATE_CART_ERROR,
+      cause: CartErrorCauses.CREATE_CART_ERROR,
+    })  
   }
 }
 
@@ -111,7 +126,11 @@ export async function productsInCar(req, res) {
       res.status(400).json({ message: "There is no cart with that id" });
     }
   } catch (error) {
-    res.status(500).json({ error });
+    CustomError.createCustomError({
+      name: CartErrorNames.GET_CART_ERROR,
+      message: CartErrorMessages.GET_CART_ERROR,
+      cause: CartErrorCauses.GET_CART_ERROR,
+    })  
   }
 }
 // put :/cid
@@ -126,7 +145,11 @@ export async function modifiedCar(req, res) {
       res.status(200).json({ message: "Updated cart", updateCar });
     }
   } catch (error) {
-    res.status(500).json({ error });
+    CustomError.createCustomError({
+      name: CartErrorNames.UPDATE_CART_ERROR,
+      message: CartErrorMessages.UPDATE_CART_ERROR,
+      cause: CartErrorCauses.UPDATE_CART_ERROR,
+    })  
   }
 }
 
@@ -152,7 +175,11 @@ export async function QuantityUpdate(req,res) {
     }
     // return updateCar
   } catch (error) {
-    res.status(500).json({ error });
+    CustomError.createCustomError({
+      name: CartErrorNames.UPDATE_CART_ERROR,
+      message: CartErrorMessages.UPDATE_CART_ERROR,
+      cause: CartErrorCauses.UPDATE_CART_ERROR,
+    })  
   }
 }
 
@@ -167,7 +194,11 @@ export async function CarProductsDelete(req,res){
             res.status(400).json({message:'Cart does not exist with that id'})
         }
     }catch(error){
-        res.status(500).json({error})
+      CustomError.createCustomError({
+        name: CartErrorNames.DELETE_CART_ERROR,
+        message: CartErrorMessages.DELETE_CART_ERROR,
+        cause: CartErrorCauses.DELETE_CART_ERROR,
+      })  
     }
 }
 
@@ -182,7 +213,11 @@ export async function prodFromCarDelete(req,res){
             res.status(400).json({message:'Error deleting product from cart'})
         }
     }catch(error){
-        res.status(500).json({error})
+      CustomError.createCustomError({
+        name: CartErrorNames.DELETE_CART_ERROR,
+        message: CartErrorMessages.DELETE_CART_ERROR,
+        cause: CartErrorCauses.DELETE_CART_ERROR,
+      })  
     }
 }
 
@@ -199,6 +234,10 @@ export async function carRemoved(req,res){
             res.status(400).json({message:'There is no cart with that id'})
         }
     }catch(error){
-        res.status(500).json({error})
+      CustomError.createCustomError({
+        name: CartErrorNames.DELETE_CART_ERROR,
+        message: CartErrorMessages.DELETE_CART_ERROR,
+        cause: CartErrorCauses.DELETE_CART_ERROR,
+      })  
     }
 }

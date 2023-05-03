@@ -13,6 +13,8 @@ import {
 import { usersModel } from "../persistencia/DAOs/mongoDB/models/users.model.js";
 import UserDBDTO from '../persistencia/DTOs/userDB.dto.js';
 import UsersRespDTO from '../persistencia/DTOs/userResp.dto.js';
+import CustomError from '../utils/errors/CustomError.js';
+import {UserErrorNames, UserErrorMessages, UserErrorCauses} from '../utils/errors/errors.enum.js';
 
 
 //Filestore
@@ -87,7 +89,11 @@ export async function dbRegistroSinPassport(req, res) {
       res.redirect("/views/login");
     }
   } catch (error) {
-    res.status(500), json({ error });
+    CustomError.createCustomError({
+      name:UserErrorNames.GET_USER_ERROR,
+      message:UserErrorMessages.GET_USER_ERROR,
+      cause:UserErrorCauses.GET_USER_ERROR
+    });
   }
 }
 
@@ -119,7 +125,11 @@ export async function dbLoginSinPassport(req, res) {
       return res.redirect("/views/errorLogin");
     }
   } catch (error) {
-    res.status(500).json({ error });
+    CustomError.createCustomError({
+      name:UserErrorNames.GET_USER_ERROR,
+      message:UserErrorMessages.GET_USER_ERROR,
+      cause:UserErrorCauses.GET_USER_ERROR
+    });
   }
 }
 
@@ -133,7 +143,11 @@ export async function mongoRegistroPassport(req, res) {
     req.session.logged = true;
     return res.redirect("/api/products");
   } catch (error) {
-    res.status(500).json({ error });
+    CustomError.createCustomError({
+      name:UserErrorNames.GET_USER_ERROR,
+      message:UserErrorMessages.GET_USER_ERROR,
+      cause:UserErrorCauses.GET_USER_ERROR
+    });
   }
 }
 
@@ -156,7 +170,11 @@ export async function mongoLoginPassport(req, res) {
     //utilizar para la vista handlebars login user
     return res.redirect("/api/products");
   } catch (error) {
-    res.status(500).json({ error });
+    CustomError.createCustomError({
+      name:UserErrorNames.GET_USER_ERROR,
+      message:UserErrorMessages.GET_USER_ERROR,
+      cause:UserErrorCauses.GET_USER_ERROR
+    });
   }
 }
 
@@ -220,7 +238,11 @@ export async function changePassword(req, res) {
       return res.status(400).json({ message: "Incorrect user or password" });
     }
   } catch (error) {
-    res.status(500).json({ error });
+    CustomError.createCustomError({
+      name:UserErrorNames.UPDATE_USER_ERROR,
+      message:UserErrorMessages.UPDATE_USER_ERROR,
+      cause:UserErrorCauses.UPDATE_USER_ERROR
+    });
   }
 }
 
@@ -233,7 +255,11 @@ export async function github(req, res) {
     // console.log(req);
     return res.redirect("/api/products");
   } catch (error) {
-    res.status(500).json({ error });
+    CustomError.createCustomError({
+      name:UserErrorNames.GET_USER_ERROR,
+      message:UserErrorMessages.GET_USER_ERROR,
+      cause:UserErrorCauses.GET_USER_ERROR
+    });
   }
 }
 
@@ -245,6 +271,10 @@ export async function google(req, res) {
     // console.log(req);
     return res.redirect("/api/products");
   } catch (error) {
-    res.status(500).json({ error });
+    CustomError.createCustomError({
+      name:UserErrorNames.GET_USER_ERROR,
+      message:UserErrorMessages.GET_USER_ERROR,
+      cause:UserErrorCauses.GET_USER_ERROR
+    });
   }
 }
