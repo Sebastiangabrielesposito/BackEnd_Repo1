@@ -55,7 +55,7 @@ export async function ticketCreated(req,res) {
           }
           if (product.stock < products[i].quantity) {
             // return res.status(400).json({ error: "Insufficient stock" });
-            
+
             // productsNotAdded.push({product: product, quantity: products[i].quantity});
             productsNotAdded.push({product: product._id});
 
@@ -69,18 +69,39 @@ export async function ticketCreated(req,res) {
         //   return res.status(400).json({ error: "Some products could not be added to the cart", productsNotAdded });
         // }
         
-        for (let i = 0; i < products.length; i++) {
-            await productUpdate(products[i].producto._id, {
-              stock: products[i].producto.stock - products[i].quantity,
-            });
-          }
-        
-        
         const ticket = new ticketModel({
             code: generateUniqueCode("TCKT"),
             amount: ticketAmount,
             purchase:purchase,
         });
+
+
+
+        for (let i = 0; i < products.length; i++) {
+          const product = products[i]
+            if(productsNotAdded.find(p => p.product === product.producto._id)){
+              continue
+            }
+            // await productUpdate(products[i].producto._id, {
+            //   stock: products[i].producto.stock - products[i].quantity,
+            // });
+            await productUpdate(product.producto._id, {
+              stock: product.producto.stock - product.quantity,
+            });
+            // console.log(cart._id);
+            await productQuantityUpdate(cart._id,product.producto._id, product.quantity);
+          }
+          
+          
+          for (let i = 0; i < cart.products.length; i++) {
+            const product = cart.products[i];
+            if (productsNotAdded.find(p => p.product === product.producto.toString())) {
+                // If the product is not added, remove it from the cart
+                await prodCarDelete(cart.id, product._id);
+            }
+        }
+        
+        
         
         // console.log(ticket);
         await ticket.save();

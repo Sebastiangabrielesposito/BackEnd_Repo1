@@ -1,6 +1,5 @@
 import { Router } from "express";
 import { usersModel } from "../persistencia/dao/models/users.model.js";
-
 const router = Router();
 
 const users = [];

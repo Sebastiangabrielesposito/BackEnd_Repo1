@@ -8,10 +8,9 @@ import {
   compareNewPassword,
   newToken,
   compareNewChangePassword,
-  createNewPassword
+  createNewPassword,
 } from "../services/users.service.js";
 import { usersModel } from "../persistencia/dao/models/users.model.js";
-
 
 //Filestore
 
@@ -144,7 +143,7 @@ export async function mongoLoginPassport(req, res) {
       req.session[key] = req.body[key];
     }
     req.session.logged = true;
-    const userData = req.user
+    const userData = req.user;
     const token = await newToken(userData);
     res.cookie("token", token);
     return res.redirect("/api/products");
@@ -164,7 +163,7 @@ export async function ExtraerCookie(req, res) {
 
 export async function RespuestaCookiesUser(req, res) {
   try {
-   console.log("User cookie:", req.cookies.token);  
+    console.log("User cookie:", req.cookies.token);
     return res.json({ user: req.user });
   } catch (error) {
     res.status(500).json({ error });

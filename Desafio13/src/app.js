@@ -105,7 +105,7 @@ app.get('/pruebaErrores',(req,res)=>{
   CustomError.createCustomError({
     name:ProductErrorNames.CREATE_PRODUCT_ERROR,
     message: ProductErrorMessages.CREATE_PRODUCT_ERROR,
-    cause: ProductErrorCauses.CREATE_PRODUCT_ERROR,
+    cause: ProductErrorCauses.CREATE_PRODUCT_ERROR
   })
 })
 
@@ -153,3 +153,4 @@ socketServer.on("connection", (socket) => {
     socketServer.emit("respuesta", newListRemove);
   });
 });
+console.log("prueba");

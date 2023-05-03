@@ -9,7 +9,7 @@ export const productManager = new ProductManager(__dirname + "/product.json");
 export async function getProductsAll(options){
     try{
         const products = await productManager.getAll(options)
-        console.log(products);
+        // console.log(products);
         return products
     }catch(error){
         console.log(error)

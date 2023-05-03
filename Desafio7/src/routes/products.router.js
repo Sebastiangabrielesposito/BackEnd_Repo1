@@ -1,7 +1,7 @@
 import { json, Router } from "express";
 import { __dirname } from "../utils.js";
-import { ProductManager } from "../dao/fileManager/productManager.js";
-// import ProductManager from "../dao/mongoManager/productManager.js";
+// import { ProductManager } from "../dao/fileManager/productManager.js";
+import ProductManager from "../dao/mongoManager/productManager.js";
 import { upload } from "../middlewares/multer.js";
 import {
   codeValidator,
