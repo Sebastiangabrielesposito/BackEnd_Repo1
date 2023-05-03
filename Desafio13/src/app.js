@@ -153,4 +153,3 @@ socketServer.on("connection", (socket) => {
     socketServer.emit("respuesta", newListRemove);
   });
 });
-console.log("prueba");
