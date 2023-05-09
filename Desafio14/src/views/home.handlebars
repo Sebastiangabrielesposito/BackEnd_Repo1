@@ -1,0 +1,43 @@
+<div style="display: flex;justify-content: space-between;margin-bottom:60px;margin-top: 20px;padding: 30px;">
+    <h2 style="color:silver;background: #000;text-align: center;margin: 0;font-family: cursive;font-size:20px;text-decoration: underline;">Bienvenido  {{email}}
+    </h2>
+    <button onclick="location.href='/users/logout'"
+        style="border-radius: 8px;height: 25px;width: 100px;background-color: #000;color:  rgb(212, 14, 107);cursor: pointer;font-family: cursive;margin-top: 5px;">Logout</button>
+</div>
+
+{{!-- <div style="display: flex;justify-content: center;">
+    <button id="buttonInfo" style="border-radius: 8px;height: 25px;width: 120px;background-color: #000;color: rgb(252, 2, 2);cursor: pointer;font-family: cursive;margin-bottom: 20px;">cookieExtractor</button>
+</div>  --}}
+
+<div style="display: flex;justify-content:center;margin-bottom:70px;padding: 5px;gap:40px;background: ;">
+    <button onclick="location.href='/realTimeProducts'"
+        style="border-radius: 8px;height: 25px;width: 200px;background-color: #000;color:  rgb(212, 14, 107);cursor: pointer;font-family: cursive;margin-top: 5px;">
+        realTimeProducts</button>
+    <button onclick="location.href='/views/addProducts'"
+        style="border-radius: 8px;height: 25px;width: 200px;background-color: #000;color:  rgb(212, 14, 107);cursor: pointer;font-family: cursive;margin-top: 5px;">Agregar producto</button>
+    <button onclick="location.href='/messages'"
+        style="border-radius: 8px;height: 25px;width: 200px;background-color: #000;color:  rgb(212, 14, 107);cursor: pointer;font-family: cursive;margin-top: 5px;">
+        messages</button>
+</div>
+
+<h1 style="color: rgb(212, 14, 107);text-align: center;margin: 5px 0;margin-bottom: 40px;font-family: cursive;font-size: 40px;background: #000;">Productos</h1>
+
+
+<div class="product-gallery">
+    {{#each prod}}
+    <div class="product-container">
+        <div class="product-image" style="background-image: url({{thumbnails}})"></div>
+        <div class="product-details">
+            <h3>{{title}}</h3>
+            <p>{{description}}</p>
+            <p>Precio: ${{price}}</p>
+            <p>Categoria: {{category}}</p>
+            <p>Stock: {{stock}}</p>
+            {{!-- <p>Status: {{status}}</p>
+            <p>Fecha de carga: {{fecha}}</p> --}}
+        </div>
+    </div>
+    {{/each}}
+</div>
+
+{{!-- <script src="/js/cookieExtractor.js"></script> --}}

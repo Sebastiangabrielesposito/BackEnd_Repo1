@@ -1,0 +1,31 @@
+<div style="display: flex;justify-content: center;padding: 10px;">
+    <button type="submit" onclick="location.href='/views/login'"
+        style="border-radius: 8px;height: 25px;width: 100px;background-color: #000;color: rgb(252, 2, 2);cursor: pointer;font-family: cursive;">Ir
+        a login</button>
+</div>
+
+<div style="display: flex;justify-content: center;">
+    <h1 style="color: silver;text-align: center;margin: 20px 0;font-family: cursive;font-size: 45px;background-color: rgba(0, 0, 0, 0.7); display: inline-block;padding: 0.1em 0.4em;border-radius: 20px;">Registro</h1>
+</div>
+
+<div style="display: flex;justify-content: center;margin-top: 10px;">
+    <form action="/users/registro" method="post" style="display: flex;justify-content: center;margin-top: 10px;flex-direction: column; gap: 10px;width: 250px;">
+        <input type="text" name="first_name" id="first_name" placeholder="Ingresa tu nombre"  style="border-radius: 8px;height: 22px;background-color: #000;color: rgb(252, 2, 2);">
+        <input type="text" name="last_name" id="last_name" placeholder="Ingresa tu apellido" style="border-radius: 8px;height: 22px;background-color: #000;color: rgb(252, 2, 2);">
+        <input type="email" name="email" id="email" placeholder="Ingresa tu email" style="border-radius: 8px;height: 22px;background-color: #000;color: rgb(252, 2, 2);">
+        <input type="number" name="age" id="age" placeholder="Ingresa tu edad"  style="border-radius: 8px;height: 22px;background-color: #000;color: rgb(252, 2, 2);">
+        <input type="password" name="password" id="password" placeholder="Ingresa tu password"  style="border-radius: 8px;height: 22px;background-color: #000;color: rgb(252, 2, 2);">
+        <div style="display:flex;justify-content:center;margin-top: 10px;">
+            <input type="submit" value="Crear" style="border-radius: 8px;height: 25px;width: 100px;background-color: #000;color: rgb(252, 2, 2);cursor: pointer;font-family: cursive;border-color: gray;">
+        </div>
+    </form>
+</div>    
+
+<div style="display: flex;justify-content: center;">
+    <h2 style="color: silver;text-align: center;margin-top:40px;font-family: cursive;   font-size: 40px;background-color: rgba(0, 0, 0, 0.7); display: inline-block;padding: 0.1em 0.4em;border-radius: 20px;">Registrarse con su cuenta de...</h2>
+</div>
+<div style="display: flex;justify-content: center;margin-top: 5px;gap :25px">
+    <button onclick="location.href='/users/registroGithub'" style="border-radius: 8px;height: 25px;width: 100px;background-color: #000;color: rgb(252, 2, 2);cursor: pointer;font-family: cursive;border-color: gray;">GITHUB</button>
+    <button onclick="location.href='/users/registroGoogle'" style="border-radius: 8px;height: 25px;width: 100px;background-color: #000;color: rgb(252, 2, 2);cursor: pointer;font-family: cursive;border-color: gray;">GOOGLE</button>
+</div>
+
