@@ -1,0 +1,166 @@
+paths:
+  /api/carts:
+    get:
+      summary: Get all carts
+      tags:
+        - Carts
+      responses:
+        '400':
+          description: No carts
+        '200':
+          description: Carts found
+    post:
+      summary: Create one cart
+      tags:
+        - Carts
+      responses:
+        '200':
+          description: Cart created and associated to user
+        '400':
+          description: Error
+
+  /api/carts/{cid}:
+    get:
+      summary: Get one cart by id
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          description: Cart identifier
+      responses:
+        '200':
+          description: Cart found successfully
+        '400':
+          description: Cart does not exist with that id
+    put:
+      summary: Modified car
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          description: Cart modified
+      responses:
+        '200':
+          description: Updated cart
+        '400':
+          description: Error updating cart products
+    delete:
+      summary: delete one cart by id
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          description: Delete cart 
+      responses:
+        '200':
+          description: Cart emptied successfully
+        '400':
+          description: Cart does not exist with that id        
+
+  /api/carts/{cid}/products/{pid}:
+    post:
+      summary: Add product to cart
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          description: Cart identifier
+        - name: pid
+          in: path
+          description: Product identifier
+      responses:
+        '200':
+          description: Product added successfully
+        '400':
+          description: There is no cart with that id
+        '401':
+          description: Premium users cannot add their own products to the cart
+    put:
+      summary: Modified car
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+        - name: products
+          in: path
+        - name: pid
+          in: path    
+          description: product in cart modified
+      responses:
+        '200':
+          description: Car updated successfully
+        '400':
+          description: Error updating cart  
+    delete:
+      summary: Delete product in car
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+        - name: products
+          in: path
+        - name: pid
+          in: path    
+          description: Delete product in car
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Error deleting product from cart        
+
+  /delall/{cid}:
+    delete:
+      summary: Add product to cart
+      tags:
+        - Carts
+      parameters:
+        - name: delall
+          in: path
+          description: Cart identifier
+        - name: cid
+          in: path
+          description: Cart identifier
+      responses:
+        '200':
+          description:Cart deleted successfully
+        '400':
+          description: There is no cart with that id
+        
+  /:cid/purchase:
+    post:
+      summary: Create ticket
+      tags:
+        - Carts
+      parameters:
+        - name: cid
+          in: path
+          description: Cart identifier
+        - name: purchase
+          in: path
+          description: create ticket
+      responses:
+        '200':
+          description: Purchase successful
+        '400':
+          description: Product not found
+        '404':
+          description: Cart not found 
+
+components:
+  schemas:
+    Carts:
+      type: object
+      properties:
+        products:
+          type: mongoose.Schema.Types.ObjectId
+        quantity:
+          type: number
+      example:
+        products: 6447491c3b8139c0b8e03356  
+        quantity: 2  
