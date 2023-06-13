@@ -1,0 +1,105 @@
+paths:
+  /api/products:
+    get:
+      summary: Get all products
+      tags:
+        - Products
+      responses:
+        '400':
+          description: No products
+        '200':
+          description: Products found
+    post:
+      summary: Create one product
+      tags:
+        - Products
+      responses:
+        '200':
+          description: Product created
+        '400':
+          description: Error creating the product
+
+  /api/products/{pid}:
+    get:
+      summary: Get one product by id
+      tags:
+        - Products
+      parameters:
+        - name: pid
+          in: path
+          description: Product identifier
+      responses:
+        '200':
+          description: Product found successfully
+        '400':
+          description: Product does not exist with that id
+    put:
+      summary: Modify a product by id
+      tags:
+        - Products
+      parameters:
+        - name: pid
+          in: path
+          description: Product identifier
+      responses:
+        '200':
+          description: Product successfully modified
+        '400':
+          description: Error when modifying the product
+    delete:
+      summary: Delete a product by id
+      tags:
+        - Products
+      parameters:
+        - name: pid
+          in: path
+          description: Product identifier
+      responses:
+        '200':
+          description: Product removed successfully
+        '400':
+          description: There is no product with that id
+        '401':
+          description: You can only delete products that belong to you
+
+components:
+  schemas:
+    Products:
+      type: object
+      properties:
+        code:
+          type: String
+          unique: true
+        title:
+          type: String
+          required: true
+        description:
+          type: String
+          required: true
+        price:
+          type: Number
+          required: true
+        stock:
+          type: Number
+          required: true
+        category:
+          type: String
+          required: true  
+        status:
+          type: Boolean
+          required: true  
+        thumbnails:
+          type: String
+        owner:
+          type: mongoose.Schema.Types.Mixed
+          ref: users  
+      example:
+        _id: 63f8e52116ef30bcf2dfd55d
+        code: abc1
+        title: Proteinas Ena
+        description: Proteina Ena 930gr
+        price: 5000
+        stock: 20
+        category: proteinas
+        status: true
+        thumbnails: http://localhost:8080/images/ena_906.png          

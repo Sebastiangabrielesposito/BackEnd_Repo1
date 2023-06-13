@@ -1,0 +1,76 @@
+<div style="display: flex;justify-content: space-between;margin-bottom:60px;padding: 30px;">
+    <div>
+        <h2 style="color:silver;text-align: center;margin: 0;font-family: cursive;font-size:20px;text-decoration: underline;">Bienvenido  {{email}}
+        </h2>
+        <div style="display: flex;justify-content: center;">
+        <img src={{profileImageURL}} alt="Foto de perfil" style="width: 130px; height: 150px; object-fit: cover; border-radius: 50%; box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);margin-top: 10px;">
+        </div>
+        <div style="text-align: center;margin-top: 8px;">
+            {{#unless isDefaultProfileImage}}
+            <a href="/users/delete-profile-image" style="text-align: center;text-decoration: none;color: silver">Eliminar foto</a>
+            {{/unless}}
+        </div>
+    </div>
+    <button onclick="location.href='/users/logout'"
+        style="border-radius: 38px;height: 25px;width: 100px;background-color: #000;color:  rgb(212, 14, 107);cursor: pointer;font-family: cursive;margin-top: 5px;">Logout</button>
+</div>
+
+<div style="display: flex;justify-content:center;margin-bottom:70px;padding: 5px;gap:40px;background: ;">
+    <button onclick="location.href='/realTimeProducts'"
+        style="border-radius: 8px;height: 25px;width: 200px;background-color: #000;color:  rgb(212, 14, 107);cursor: pointer;font-family: cursive;margin-top: 5px;">
+        realTimeProducts</button>
+    <button onclick="location.href='/views/addProducts'"
+        style="border-radius: 8px;height: 25px;width: 200px;background-color: #000;color:  rgb(212, 14, 107);cursor: pointer;font-family: cursive;margin-top: 5px;">Agregar producto</button>
+    <button onclick="location.href='/messages'"
+        style="border-radius: 8px;height: 25px;width: 200px;background-color: #000;color:  rgb(212, 14, 107);cursor: pointer;font-family: cursive;margin-top: 5px;">
+        messages</button>
+</div>
+<div style="display: flex;justify-content: space-around;">
+    <div style="text-align: center;display: flex;justify-content:center;flex-direction: column;margin-bottom: 40px;">
+        <div style="text-align: center;display: flex;justify-content:center;">
+            <h4 style="border-radius: 8px;height: 25px;width: 200px;background-color: #000;color:  rgb(212, 14, 107);cursor: pointer;font-family: cursive;margin-top: 5px;text-align: center;">Subir foto de perfil</h4>
+        </div>
+        <div>
+            <form action="/users/:uid/profile" method="POST" enctype="multipart/form-data">
+                <input style="border-radius: 8px;height: 25px;width: 200px;background-color: #000;color:  rgb(212, 14, 107);cursor: pointer;font-family: cursive;margin-top: 5px;text-align: center;" type="file" name="img_profile" multiple>
+                <button type="submit"  style="border-radius: 8px;height: 25px;background-color: rgb(212, 14, 107);color: silver ;cursor: pointer;font-family: cursive;margin-top: 5px;">Enviar</button>
+            </form>
+        </div>
+    </div>
+
+    <div style="text-align: center;display: flex;justify-content:center;flex-direction: column;margin-bottom: 40px;">
+        <div style="text-align: center;display: flex;justify-content:center;">
+            <h4 style="border-radius: 8px;height: 25px;width: 200px;background-color: #000;color:  rgb(212, 14, 107);cursor: pointer;font-family: cursive;margin-top: 5px;text-align: center;">Agregar documentos</h4>
+        </div>
+        <div>
+            <form action="/users/:uid/documents" method="POST" enctype="multipart/form-data">
+                <input style="border-radius: 8px;height: 25px;width: 200px;background-color: #000;color:  rgb(212, 14, 107);cursor: pointer;font-family: cursive;margin-top: 5px;text-align: center;" type="file" name="documents" multiple>
+                <button type="submit"  style="border-radius: 8px;height: 25px;background-color: rgb(212, 14, 107);color: silver ;cursor: pointer;font-family: cursive;margin-top: 5px;">Enviar</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+
+<h1 style="color: rgb(212, 14, 107);text-align: center;margin: 5px 0;margin-bottom: 40px;font-family: cursive;font-size: 40px;background: #000;">Productos</h1>
+
+
+<div class="product-gallery">
+    {{#each prod}}
+    <div class="product-container">
+        <div class="product-image" style="background-image: url({{thumbnails}})"></div>
+        <div class="product-details">
+            <h3>{{title}}</h3>
+            <p>{{description}}</p>
+            <p>Precio: ${{price}}</p>
+            <p>Categoria: {{category}}</p>
+            <p>Stock: {{stock}}</p>
+            {{!-- <p>Status: {{status}}</p>
+            <p>Fecha de carga: {{fecha}}</p> --}}
+        </div>
+    </div>
+    {{/each}}
+</div>
+
+<script src="/js/cookieExtractor.js"></script>
