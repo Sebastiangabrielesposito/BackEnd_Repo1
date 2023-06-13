@@ -67,7 +67,7 @@ passport.use(
         if(!userDB) return done(null,false)
         const compareNewPasswords = await comparePasswords(password,userDB.password)
         if(!compareNewPasswords) return done(null,false)
-        if (email === "adminCoder@hotmail.com" && password === config.ADMIN_KEY) {
+        if (email === config.ADMIN_USER || config.ADMIN_CODER_USER && password === config.ADMIN_KEY || config.ADMIN_CODER_KEY) {
          logger.info(userDB.role);
           req.session.isAdmin = true;
          logger.info(req.session.isAdmin);
