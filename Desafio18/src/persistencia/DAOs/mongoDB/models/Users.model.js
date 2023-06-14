@@ -34,25 +34,20 @@ const usersSchema = new mongoose.Schema({
     enum: ["user", "admin", "premium"],
     default: "user",
   },
-  documents: [
+  documents: [[
     {
-      name: {
-        type: String,
-      },
-
-      reference: {
-        type: String,
-      },
-    },
-  ],
+    name: { type: String, required: true },
+    reference: { type: String, required: true },
+  }
+  ]],
   last_connection: {
     type: Date,
   },
   img_profile: {
-    data:Buffer,
+    data: Buffer,
     contentType: String,
-    reference:String
-  }
+    reference: String,
+  },
 });
 
 export const usersModel = mongoose.model("Users", usersSchema);

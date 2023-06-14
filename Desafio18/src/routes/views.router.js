@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { auth, isLogged } from "../middlewares/authentLogin.js";
-import {registro,errorRegistro,login,errorLogin,addProducts,changePassword,nodemailerPassword,jwt} from '../controllers/views.controller.js'
+import {registro,errorRegistro,login,errorLogin,addProducts,changePassword,nodemailerPassword,jwt,profileAddDocuments} from '../controllers/views.controller.js'
 import { isAdmin,isAdminAndIsPremum } from "../middlewares/authentLogin.js";
 import {checkExpiration} from '../middlewares/nodemailer.middlewares.js';
 const router = Router();
@@ -20,6 +20,8 @@ router.get('/changePassword' , checkExpiration, changePassword)
 router.get("/nodemailerPassword",nodemailerPassword)
 
 router.get('/jwtFront', jwt)
+
+router.get('/profileAddDocuments',profileAddDocuments)
 
 
 

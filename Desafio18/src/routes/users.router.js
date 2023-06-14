@@ -20,7 +20,8 @@ import {
   updateUserRole,
   usersUpload,
   imgProfile,
-  deleteImgProfile 
+  deleteImgProfile,
+  adminDeleteDocuments 
 } from "../controllers/users.controller.js";
 import { isAdmin } from "../middlewares/authentLogin.js";
 import {checkExpiration} from "../middlewares/nodemailer.middlewares.js"
@@ -85,13 +86,16 @@ router.get("/logout", logout);
 //changePassword
 router.put("/changePassword",changePassword);
 
-//change user/premium and premium/user
+//change user/premium and premium/user //ADMIN MANUAL
 router.put("/premium/:uid",isAdmin,updateUserRole )
 
 //add documents user
 router.post("/:uid/documents",userUpload.array("documents"),usersUpload)
 
-//add image Profile user
+//delete documents User
+router.get("/:uid/documents/delete", isAdmin,adminDeleteDocuments);
+
+//add image Profile user //ELIMINA ADMIN MANUAL URL
 router.post("/:uid/profile",profileUpload.single("img_profile"),imgProfile)
 
 //Delete image profile user

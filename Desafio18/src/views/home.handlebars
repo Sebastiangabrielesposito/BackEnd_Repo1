@@ -1,9 +1,10 @@
+<div style="text-align:center;color: rgb(91, 133, 155);margin-top: 15px;font-weight: 900;text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);"><h2 style="background-color: #000;margin: 0 360px;border-radius: 8px;">*UNIVERSAL MARKET*</h2></div>
 <div style="display: flex;justify-content: space-between;margin-bottom:60px;padding: 30px;">
     <div>
-        <h2 style="color:silver;text-align: center;margin: 0;font-family: cursive;font-size:20px;text-decoration: underline;">Bienvenido  {{email}}
-        </h2>
+        <h3 style="color:silver;text-align: center;margin: 0;font-family: cursive;font-size:20px;text-decoration: underline;">Bienvenido  {{email}}
+        </h3>
         <div style="display: flex;justify-content: center;">
-        <img src={{profileImageURL}} alt="Foto de perfil" style="width: 130px; height: 150px; object-fit: cover; border-radius: 50%; box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);margin-top: 10px;">
+        <img src={{profileImageURL}} alt="Foto de perfil" style="width: 120px; height: 150px; object-fit: cover; border-radius: 50%; box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);margin-top: 10px;">
         </div>
         <div style="text-align: center;margin-top: 8px;">
             {{#unless isDefaultProfileImage}}
@@ -40,14 +41,16 @@
 
     <div style="text-align: center;display: flex;justify-content:center;flex-direction: column;margin-bottom: 40px;">
         <div style="text-align: center;display: flex;justify-content:center;">
-            <h4 style="border-radius: 8px;height: 25px;width: 200px;background-color: #000;color:  rgb(212, 14, 107);cursor: pointer;font-family: cursive;margin-top: 5px;text-align: center;">Agregar documentos</h4>
+            <h4 style="border-radius: 8px;height: 25px;width: 200px;background-color: #000;color:  rgb(212, 14, 107);cursor: pointer;font-family: cursive;margin-top: 5px;text-align: center;">Queres ser premium?</h4>
         </div>
-        <div>
+        <button onclick="location.href='/views/profileAddDocuments'"
+        style="border-radius: 8px;height: 25px;width: 200px;background-color: #000;color:  rgb(212, 14, 107);cursor: pointer;font-family: cursive;">Agregar documentos</button>
+        {{!-- <div>
             <form action="/users/:uid/documents" method="POST" enctype="multipart/form-data">
                 <input style="border-radius: 8px;height: 25px;width: 200px;background-color: #000;color:  rgb(212, 14, 107);cursor: pointer;font-family: cursive;margin-top: 5px;text-align: center;" type="file" name="documents" multiple>
                 <button type="submit"  style="border-radius: 8px;height: 25px;background-color: rgb(212, 14, 107);color: silver ;cursor: pointer;font-family: cursive;margin-top: 5px;">Enviar</button>
             </form>
-        </div>
+        </div> --}}
     </div>
 
 </div>

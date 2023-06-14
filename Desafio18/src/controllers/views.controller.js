@@ -56,3 +56,11 @@ export async function jwt(req,res){
         res.status(500).json({error})
     }
 }
+
+export async function profileAddDocuments(req,res){
+    try{
+        res.render('profileAddDocuments',{titulo: "Verificación de perfil"})
+    }catch(error){
+        res.status(500).json({error})
+    }
+}

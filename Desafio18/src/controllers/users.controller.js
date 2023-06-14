@@ -276,12 +276,24 @@ export async function updateUserRole(req, res) {
       message: UserErrorMessages.UPDATE_USER_ERROR,
       cause: UserErrorCauses.UPDATE_USER_ERROR,
     });
-    // console.log('Error al intentar actualizar el usuario:', error);
-    // return res.status(500).json({ message: 'Error updating user' });
   }
 }
 
-//Upload imagen Users con Multer
+//Upload imagen/documents Users con Multer
+// function getDocumentType(fieldName) {
+//   switch (fieldName) {
+//     case "identification":
+//       return "identification";
+//     case "bankStatement":
+//       return "bankStatement";
+//     case "proofOfAddress":
+//       return "proofOfAddress";
+//     default:
+//       return null;
+//   }
+// }
+
+//Upload imagen/documents Users con Multer
 export async function usersUpload(req, res) {
   try {
     const uid = req.user._id;
@@ -296,12 +308,40 @@ export async function usersUpload(req, res) {
       name: file.originalname,
       reference: file.filename,
     }));
+    console.log(newDocuments);
 
-    user.documents.push(...newDocuments);
+    // console.log(files);
+
+    if (newDocuments.length === 0) {
+      return res.status(400).json({ message: "No se encontraron documentos válidos" });
+    }
+
+    user.documents.push(newDocuments)
     await user.save();
 
-    return res.status(200).json({ message: "Documentos subidos exitosamente" });
+    // return res.status(200).json({ message: "Documentos subidos exitosamente" });
+    res.redirect('/api/products')
   } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Error en el servidor" });
+  }
+}
+
+export async function adminDeleteDocuments(req,res){
+  try{
+    const uid = req.params.uid;
+
+    console.log(req.params.uid);
+    // console.log(req.params._id);
+
+    const user = await usersModel.findById(uid);
+    if (!user) {
+      return res.status(404).json({ message: "Usuario no encontrado" });
+    }
+    user.documents = []; 
+    await user.save();
+    res.redirect('/api/products')
+  }catch (error) {
     console.error(error);
     return res.status(500).json({ message: "Error en el servidor" });
   }
@@ -358,7 +398,6 @@ export async function github(req, res) {
   try {
     req.session.logged = true;
     req.session.email = req.user.email;
-    // console.log(req);
     return res.redirect("/api/products");
   } catch (error) {
     CustomError.createCustomError({
@@ -374,7 +413,6 @@ export async function google(req, res) {
   try {
     req.session.logged = true;
     req.session.email = req.user.email;
-    // console.log(req);
     return res.redirect("/api/products");
   } catch (error) {
     CustomError.createCustomError({

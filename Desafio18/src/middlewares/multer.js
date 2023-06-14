@@ -12,7 +12,6 @@ const storage = multer.diskStorage({
     cb(null, file.originalname);
   },
 });
-
 export const upload = multer({ storage });
 
 const userStorage = multer.diskStorage({
@@ -28,7 +27,6 @@ const userStorage = multer.diskStorage({
     cb(null, filename);
   },
 });
-
 export const userUpload = multer({ storage: userStorage });
 
 const profileStorage = multer.diskStorage({
@@ -42,5 +40,4 @@ const profileStorage = multer.diskStorage({
     cb(null, filename);
   },
 });
-
 export const profileUpload = multer({ storage: profileStorage });
