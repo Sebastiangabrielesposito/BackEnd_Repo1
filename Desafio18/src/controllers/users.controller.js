@@ -252,6 +252,16 @@ export async function changePassword(req, res) {
   }
 }
 
+// Verificar si el usuario ha cargado los documentos requeridos para pasar de user a premium
+function hasRequiredDocuments(user) {
+  const requiredDocuments = ["identification", "bankStatement", "proofOfAddress"];
+  return requiredDocuments.every(documentType => {
+    return user.documents.some(document => document.type === documentType);
+  });
+}
+
+
+//Admin update role user/premium ,premium/user
 export async function updateUserRole(req, res) {
   const { uid } = req.params;
   const user = await usersModel.findById(uid);
@@ -264,11 +274,19 @@ export async function updateUserRole(req, res) {
         .status(401)
         .json({ message: "User does not have a valid role" });
     }
+
+    // console.log(user);
+    // Verificar si el usuario ha cargado los documentos requeridos
+    if (user.role === "user" && !hasRequiredDocuments(user)) {
+      return res.status(400).json({ message: "El usuario no ha terminado de procesar su documentación" });
+    }  
+
+
     console.log("Rol actual del usuario:", user.role);
     user.role = user.role === "premium" ? "user" : "premium";
     console.log("Rol actual del usuario:", user.role);
     await user.save();
-    console.log(user.role);
+    // console.log(user.role);
     res.json({ message: "User role updated", user });
   } catch (error) {
     CustomError.createCustomError({
@@ -279,19 +297,20 @@ export async function updateUserRole(req, res) {
   }
 }
 
+
 //Upload imagen/documents Users con Multer
-// function getDocumentType(fieldName) {
-//   switch (fieldName) {
-//     case "identification":
-//       return "identification";
-//     case "bankStatement":
-//       return "bankStatement";
-//     case "proofOfAddress":
-//       return "proofOfAddress";
-//     default:
-//       return null;
-//   }
-// }
+function getDocumentType(fieldName) {
+  switch (fieldName) {
+    case "identification":
+      return "identification";
+    case "bankStatement":
+      return "bankStatement";
+    case "proofOfAddress":
+      return "proofOfAddress";
+    default:
+      return null;
+  }
+}
 
 //Upload imagen/documents Users con Multer
 export async function usersUpload(req, res) {
@@ -299,14 +318,18 @@ export async function usersUpload(req, res) {
     const uid = req.user._id;
     const files = req.files;
     
-
+   console.log(files);
     const user = await usersModel.findById(uid);
     if (!user) {
       return res.status(404).json({ message: "Usuario no encontrado" });
     }
-    const newDocuments = files.map((file) => ({
-      name: file.originalname,
-      reference: file.filename,
+    // const newDocuments = files.map((file) => ({
+    //   name: file.originalname,
+    //   reference: file.filename,
+    // }));
+    const newDocuments = Object.keys(files).map((fieldname) => ({
+      name: getDocumentType(fieldname),
+      reference: files[fieldname][0].filename,
     }));
     console.log(newDocuments);
 
@@ -347,7 +370,7 @@ export async function adminDeleteDocuments(req,res){
   }
 }
 
-//Upload image de profile Users
+//Upload image profile Users
 export async function imgProfile(req, res) {
   try {
     const uid = req.user._id;
@@ -390,6 +413,30 @@ export async function deleteImgProfile(req,res){
     console.error(error);
     return res.status(500).json({ message: "Error al eliminar imagen de perfil" });
   }
+}
+
+//Upload images products Users
+export async function uploadImagesProducts(req,res){
+try{
+  const  uid = req.user._id
+  const files = req.files
+
+  const user = await usersModel.findById(uid)
+  if (!user) {
+    return res.status(404).json({ message: "Usuario no encontrado" });
+  }
+  files.forEach((file) => {
+    user.img_products.push({
+      data: file.filename
+    });
+  });
+  await user.save()
+  res.redirect('/api/products')
+
+}catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Error al cargar imagenes de productos de usuario" });
+  } 
 }
 
 //github registro y login

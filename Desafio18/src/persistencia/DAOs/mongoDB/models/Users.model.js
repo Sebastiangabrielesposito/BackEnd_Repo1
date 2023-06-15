@@ -48,6 +48,11 @@ const usersSchema = new mongoose.Schema({
     contentType: String,
     reference: String,
   },
+  img_products:[
+    {
+    data:String,
+    },
+  ] 
 });
 
 export const usersModel = mongoose.model("Users", usersSchema);

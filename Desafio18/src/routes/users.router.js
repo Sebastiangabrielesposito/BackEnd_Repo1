@@ -21,11 +21,12 @@ import {
   usersUpload,
   imgProfile,
   deleteImgProfile,
-  adminDeleteDocuments 
+  adminDeleteDocuments,
+  uploadImagesProducts 
 } from "../controllers/users.controller.js";
 import { isAdmin } from "../middlewares/authentLogin.js";
 import {checkExpiration} from "../middlewares/nodemailer.middlewares.js"
-import {userUpload,profileUpload} from '../middlewares/multer.js';
+import {userUpload,profileUpload,productsUpload} from '../middlewares/multer.js';
 
 
 const router = Router();
@@ -87,16 +88,25 @@ router.get("/logout", logout);
 router.put("/changePassword",changePassword);
 
 //change user/premium and premium/user //ADMIN MANUAL
-router.put("/premium/:uid",isAdmin,updateUserRole )
+router.get("/premium/:uid",isAdmin,updateUserRole )
 
 //add documents user
-router.post("/:uid/documents",userUpload.array("documents"),usersUpload)
+// router.post("/:uid/documents",userUpload.array("documents"),usersUpload)
+router.post("/:uid/documents", userUpload.fields([
+  { name: "identification", maxCount: 1 },
+  { name: "bankStatement", maxCount: 1 },
+  { name: "proofOfAddress", maxCount: 1 }
+]), usersUpload);
+
 
 //delete documents User
 router.get("/:uid/documents/delete", isAdmin,adminDeleteDocuments);
 
 //add image Profile user //ELIMINA ADMIN MANUAL URL
 router.post("/:uid/profile",profileUpload.single("img_profile"),imgProfile)
+
+//add image products Users 
+router.post("/:uid/products", productsUpload.array("img_products"), uploadImagesProducts)
 
 //Delete image profile user
 router.get('/delete-profile-image',deleteImgProfile)

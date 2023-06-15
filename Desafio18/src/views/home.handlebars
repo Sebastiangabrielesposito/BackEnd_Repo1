@@ -52,9 +52,17 @@
             </form>
         </div> --}}
     </div>
-
 </div>
 
+<div style="display: flex;justify-content: center;margin: 40px;">
+    <div style="display: flex;justify-content: center;flex-direction: column;">
+        <h4 style="border-radius: 8px;height: 25px;width: 200px;background-color: #000;color:  rgb(212, 14, 107);cursor: pointer;font-family: cursive;margin-top: 5px;text-align: center;font-size: 12px;">Queres vender un producto/s?</h4>
+        <form action="/users/:uid/products" method="post" enctype="multipart/form-data">
+            <input style="border-radius: 8px;height: 25px;width: 200px;background-color: #000;color:  rgb(212, 14, 107);cursor: pointer;font-family: cursive;margin-top: 5px;text-align: center;" type="file" name="img_products" accept=".pdf,.jpg,.png"multiple>
+            <button style="border-radius: 8px;height: 25px;background-color: rgb(212, 14, 107);color: silver ;cursor: pointer;font-family: cursive;">Subir img</button>
+        </form>
+    </div>
+</div>
 
 <h1 style="color: rgb(212, 14, 107);text-align: center;margin: 5px 0;margin-bottom: 40px;font-family: cursive;font-size: 40px;background: #000;">Productos</h1>
 
