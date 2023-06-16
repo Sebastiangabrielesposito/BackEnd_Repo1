@@ -256,7 +256,7 @@ export async function changePassword(req, res) {
 function hasRequiredDocuments(user) {
   const requiredDocuments = ["identification", "bankStatement", "proofOfAddress"];
   return requiredDocuments.every(documentType => {
-    return user.documents.some(document => document.type === documentType);
+    return user.documents.some(document => document.name === documentType);
   });
 }
 
@@ -338,8 +338,8 @@ export async function usersUpload(req, res) {
     if (newDocuments.length === 0) {
       return res.status(400).json({ message: "No se encontraron documentos válidos" });
     }
-
-    user.documents.push(newDocuments)
+    user.documents = newDocuments
+    // user.documents.push(newDocuments)
     await user.save();
 
     // return res.status(200).json({ message: "Documentos subidos exitosamente" });
@@ -353,16 +353,14 @@ export async function usersUpload(req, res) {
 export async function adminDeleteDocuments(req,res){
   try{
     const uid = req.params.uid;
-
-    console.log(req.params.uid);
-    // console.log(req.params._id);
-
+    
     const user = await usersModel.findById(uid);
     if (!user) {
       return res.status(404).json({ message: "Usuario no encontrado" });
     }
     user.documents = []; 
     await user.save();
+    console.log(`Documents User id ${uid} Removed`);
     res.redirect('/api/products')
   }catch (error) {
     console.error(error);
