@@ -80,7 +80,7 @@ export async function productId(req, res) {
     const { pid } = req.params;
     const product = await productById(pid);
     if (product) {
-      res.render("productHome", { product, titulo: "ProductHome" });
+      res.render("productHome", { prod:product, titulo: "ProductHome" , email: req.session.email.split('@')[0],});
       // res.status(200).json({ message: `Producto encontrado con exito`, product });
     } else {
         res.status(400).json({ message: "Product does not exist with that id" });

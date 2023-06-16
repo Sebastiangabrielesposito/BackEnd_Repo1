@@ -16,53 +16,58 @@
         style="border-radius: 38px;height: 25px;width: 100px;background-color: #000;color:  rgb(212, 14, 107);cursor: pointer;font-family: cursive;margin-top: 5px;">Logout</button>
 </div>
 
-<div style="display: flex;justify-content:center;margin-bottom:70px;padding: 5px;gap:40px;background: ;">
+<div style="display: flex;justify-content:center;margin-bottom:70px;padding: 5px;gap:90px;">
     <button onclick="location.href='/realTimeProducts'"
-        style="border-radius: 8px;height: 25px;width: 200px;background-color: #000;color:  rgb(212, 14, 107);cursor: pointer;font-family: cursive;margin-top: 5px;">
+        style="border-radius: 8px;height: 25px;width: 200px;background-color: #000;color:  blue;cursor: pointer;font-family: cursive;margin-top: 5px;">
         realTimeProducts</button>
     <button onclick="location.href='/views/addProducts'"
-        style="border-radius: 8px;height: 25px;width: 200px;background-color: #000;color:  rgb(212, 14, 107);cursor: pointer;font-family: cursive;margin-top: 5px;">Agregar producto</button>
+        style="border-radius: 8px;height: 25px;width: 200px;background-color: #000;color:  whitesmoke;cursor: pointer;font-family: cursive;margin-top: 5px;">Agregar producto</button>
     <button onclick="location.href='/messages'"
-        style="border-radius: 8px;height: 25px;width: 200px;background-color: #000;color:  rgb(212, 14, 107);cursor: pointer;font-family: cursive;margin-top: 5px;">
+        style="border-radius: 8px;height: 25px;width: 200px;background-color: #000;color:  yellow;cursor: pointer;font-family: cursive;margin-top: 5px;">
         messages</button>
 </div>
-<div style="display: flex;justify-content: space-around;">
-    <div style="text-align: center;display: flex;justify-content:center;flex-direction: column;margin-bottom: 40px;">
+<div style="display: flex;justify-content: space-around;margin-top: 100px 0;gap: 150px;">
+    
+    <div style="text-align: center;display: flex;justify-content:center;flex-direction: column;">
         <div style="text-align: center;display: flex;justify-content:center;">
             <h4 style="border-radius: 8px;height: 25px;width: 200px;background-color: #000;color:  rgb(212, 14, 107);cursor: pointer;font-family: cursive;margin-top: 5px;text-align: center;">Subir foto de perfil</h4>
         </div>
         <div>
-            <form action="/users/:uid/profile" method="POST" enctype="multipart/form-data">
+            <form action="/users/:uid/profile" method="POST" enctype="multipart/form-data" style="display: flex;justify-content: center;flex-direction: column;">
                 <input style="border-radius: 8px;height: 25px;width: 200px;background-color: #000;color:  rgb(212, 14, 107);cursor: pointer;font-family: cursive;margin-top: 5px;text-align: center;" type="file" name="img_profile" multiple>
                 <button type="submit"  style="border-radius: 8px;height: 25px;background-color: rgb(212, 14, 107);color: silver ;cursor: pointer;font-family: cursive;margin-top: 5px;">Enviar</button>
             </form>
         </div>
     </div>
 
-    <div style="text-align: center;display: flex;justify-content:center;flex-direction: column;margin-bottom: 40px;">
-        <div style="text-align: center;display: flex;justify-content:center;">
-            <h4 style="border-radius: 8px;height: 25px;width: 200px;background-color: #000;color:  rgb(212, 14, 107);cursor: pointer;font-family: cursive;margin-top: 5px;text-align: center;">Queres ser premium?</h4>
+    {{!-- <div style="text-align: center;display: flex;justify-content:center;">
+        <div style="text-align: center;display: flex;justify-content:center;flex-direction: column;">
+            <h4 style="border-radius: 8px;height: 25px;width: 200px;background-color: #000;color: whitesmoke;cursor: pointer;font-family: cursive;text-align: center;">Queres ser premium?</h4>
+        
+            <button onclick="location.href='/views/profileAddDocuments'"
+            style="border-radius: 8px;height: 25px;width: 200px;background-color: #000;color:  rgb(212, 14, 107);cursor: pointer;font-family: cursive;">Agregar documentos</button>
         </div>
-        <button onclick="location.href='/views/profileAddDocuments'"
-        style="border-radius: 8px;height: 25px;width: 200px;background-color: #000;color:  rgb(212, 14, 107);cursor: pointer;font-family: cursive;">Agregar documentos</button>
-        {{!-- <div>
-            <form action="/users/:uid/documents" method="POST" enctype="multipart/form-data">
-                <input style="border-radius: 8px;height: 25px;width: 200px;background-color: #000;color:  rgb(212, 14, 107);cursor: pointer;font-family: cursive;margin-top: 5px;text-align: center;" type="file" name="documents" multiple>
-                <button type="submit"  style="border-radius: 8px;height: 25px;background-color: rgb(212, 14, 107);color: silver ;cursor: pointer;font-family: cursive;margin-top: 5px;">Enviar</button>
-            </form>
-        </div> --}}
+    </div> --}}
+
+    <div style="display: flex;justify-content: center;">
+        <div style="display: flex;justify-content: center;flex-direction: column;">
+            <h4 style="border-radius: 8px;height: 25px;width: 200px;background-color: #000;color:  rgb(212, 14, 107);cursor: pointer;font-family: cursive;margin-top: 5px;text-align: center;font-size: 12px;">Queres vender un producto/s?</h4>
+            <form action="/users/:uid/products" method="post" enctype="multipart/form-data" style="display: flex;justify-content: center;flex-direction: column;">
+                <input style="border-radius: 8px;height: 25px;width: 200px;background-color: #000;color:  rgb(212, 14, 107);cursor: pointer;font-family: cursive;margin-top: 5px;text-align: center;" type="file" name="img_products" accept=".pdf,.jpg,.png"multiple>
+                <button style="border-radius: 8px;height: 25px;background-color: rgb(212, 14, 107);color: silver ;cursor: pointer;font-family: cursive;margin-top: 5px;">Subir img</button>
+            </form>        
+        </div>
     </div>
 </div>
 
-<div style="display: flex;justify-content: center;margin: 40px;">
-    <div style="display: flex;justify-content: center;flex-direction: column;">
-        <h4 style="border-radius: 8px;height: 25px;width: 200px;background-color: #000;color:  rgb(212, 14, 107);cursor: pointer;font-family: cursive;margin-top: 5px;text-align: center;font-size: 12px;">Queres vender un producto/s?</h4>
-        <form action="/users/:uid/products" method="post" enctype="multipart/form-data">
-            <input style="border-radius: 8px;height: 25px;width: 200px;background-color: #000;color:  rgb(212, 14, 107);cursor: pointer;font-family: cursive;margin-top: 5px;text-align: center;" type="file" name="img_products" accept=".pdf,.jpg,.png"multiple>
-            <button style="border-radius: 8px;height: 25px;background-color: rgb(212, 14, 107);color: silver ;cursor: pointer;font-family: cursive;">Subir img</button>
-        </form>
+<div style="text-align: center;display: flex;justify-content:center;">
+    <div style="text-align: center;display: flex;justify-content:center;flex-direction: column;margin: 80px ;">
+        <h4 style="border-radius: 8px;height: 25px;width: 200px;background-color: #000;color:  rgb(212, 14, 107); pointer;font-family: cursive;margin-top: 5px;text-align: center;">Queres ser premium?</h4>
+        <button onclick="location.href='/views/profileAddDocuments'"
+        style="border-radius: 8px;height: 25px;width: 200px;background-color: rgb(212, 14, 107);color: silver ;cursor: pointer;font-family: cursive;">Agregar documentos</button>
     </div>
 </div>
+
 
 <h1 style="color: rgb(212, 14, 107);text-align: center;margin: 5px 0;margin-bottom: 40px;font-family: cursive;font-size: 40px;background: #000;">Productos</h1>
 
@@ -79,6 +84,7 @@
             <p>Stock: {{stock}}</p>
             {{!-- <p>Status: {{status}}</p>
             <p>Fecha de carga: {{fecha}}</p> --}}
+             <a href="/api/products/{{_id}}">Ver detalles</a>
         </div>
     </div>
     {{/each}}
