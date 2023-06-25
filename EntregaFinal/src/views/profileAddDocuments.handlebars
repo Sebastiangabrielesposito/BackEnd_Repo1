@@ -1,0 +1,38 @@
+
+    <div style="text-align: center;display: flex;justify-content:center;flex-direction: column;margin: 20px 0px;">
+        <div style="text-align: center;display: flex;justify-content:center;">
+            <h4 style="border-radius: 8px;height: 25px;width: 200px;background-color: #000;color:  rgb(212, 14, 107);cursor: pointer;font-family: cursive;margin-top: 5px;text-align: center;">Validación de perfil</h4>
+        </div>
+
+        <div >
+            <form action="/users/:uid/documents" method="post" enctype="multipart/form-data" style="">
+                <div style="display: flex;justify-content: space-around; margin-top: 120px;">
+                    <div style="display: flex;flex-direction: column;border-radius: 8px;width: 200px;background-color: #000;color:  rgb(212, 14, 107);cursor: pointer;font-family: cursive;margin-top: 5px;text-align: center;">
+                        <label for="identification">Identificación:</label>
+                        <input type="file" name="identification" id="identification" accept=".pdf,.jpg,.png" required>
+                    </div>
+                    
+                    <div style="display: flex;flex-direction: column;border-radius: 8px;width: 270px;background-color: #000;color:  rgb(212, 14, 107);cursor: pointer;font-family: cursive;margin-top: 5px;text-align: center;">
+                        <label for="bankStatement">Comprobante de estado de cuenta:</label>
+                        <input type="file" name="bankStatement" id="bankStatement" accept=".pdf,.jpg,.png" required>
+                    </div>
+
+                    <div style="display: flex;flex-direction: column;border-radius: 8px;width: 200px;background-color: #000;color:  rgb(212, 14, 107);cursor: pointer;font-family: cursive;margin-top: 5px;text-align: center;">
+                        <label for="proofOfAddress">Comprobante de domicilio:</label>
+                        <input type="file" name="proofOfAddress" id="proofOfAddress" accept=".pdf,.jpg,.png" required>
+                    </div>
+                    
+                 
+                </div>
+                <div style="display: flex;justify-content: center;">
+                    <button type="submit" style="border-radius: 8px;height: 25px;background-color: rgb(212, 14, 107);color: silver ;cursor: pointer;font-family: cursive;margin-top: 125px;">Cargar documentos</button>
+                </div>
+            </form>
+        </div>
+        <div style="display: flex;justify-content: center;margin-top: 100px;">
+            <button type="submit" onclick="location.href='/api/products'"
+                    style="border-radius: 8px;height: 25px;width: 120px;background-color: #000;color: rgb(212, 14, 107);cursor: pointer;font-family: cursive;">Ir a productos</button>
+        </div>
+    </div>
+
+    

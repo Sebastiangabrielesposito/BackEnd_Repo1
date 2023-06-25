@@ -1,0 +1,71 @@
+<h3 style="color: rgb(212, 14, 107);text-align: center;margin: 5px 0;margin: 40px 0;font-family: cursive;font-size: 40px;background: #000;">Carrito</h3>
+
+<div style="display: flex;justify-content: center;margin-bottom: 50px;">
+    <button type="submit" onclick="location.href='/api/products'"
+            style="border-radius: 8px;height: 25px;width: 120px;background-color: #000;color: rgb(212, 14, 107);cursor: pointer;font-family: cursive;">Ir a productos</button>
+</div>
+
+<div class="product-galleryShop">
+    <div class="product-containerShop" style="color: white;">
+        <h3>Username: {{ username }}</h3>
+        <h3>Cart ID: {{ cartId }}</h3>
+
+        <h3>Products:</h3>
+        {{#if products}}
+        <ul style="font-size: 12px;">
+        {{#each products}}
+            <li>{{ this}} - 
+                {{!-- Quantity: {{this.quantity  }} --}}
+            </li>
+        {{/each}}
+        </ul>
+        {{else}}
+            <p>No hay productos en el carrito</p>
+        {{/if}}
+    
+        <div style="display:flex;justify-content: center;margin-top: 50px;gap: 7px;">
+            <form action="/api/carts/:cid/purchase" method="post">
+                <button style="border-radius: 8px;height: 25px;width: 150px;background-color: #000;color:  blue;cursor: pointer;font-family: cursive;margin-top: 5px;"> Terminar compra</button>
+            </form>
+    
+        <form id="emptyCartForm" action="/api/carts/{{ cartId }}" method="delete">
+            <button type="submit" style="border-radius: 8px;height: 25px;width: 130px;background-color: #000;color:  rgb(212, 14, 107);cursor: pointer;font-family: cursive;margin-top: 5px;" > vaciar carrito</button>
+            </form>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<script>
+    const emptyCartForm = document.getElementById("emptyCartForm")
+    emptyCartForm.addEventListener("click",async (event)=>{
+        event.preventDefault()
+
+        const confirmEmpty = confirm("¿Estás seguro de que quieres vaciar el carrito?");
+
+         if (confirmEmpty) {
+            const formAction = emptyCartForm.getAttribute("action");
+
+            try {
+                const response = await fetch(formAction, {
+                    method: "DELETE",
+                });
+
+                if (response.ok) {
+                    alert("El carrito se ha vaciado exitosamente");
+                    window.location.href = "/views/carShop";
+                    
+                } else {
+                     alert("Error al vaciar el carrito");
+                     console.error("Error al vaciar el carrito:", error);
+                }
+
+            } catch (error) {
+                console.error("Error al vaciar el carrito:", error);
+            }
+        }
+    });
+
+</script>

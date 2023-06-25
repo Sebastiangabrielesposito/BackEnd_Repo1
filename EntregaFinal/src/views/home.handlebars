@@ -1,0 +1,113 @@
+<div style="text-align:center;color: rgb(91, 133, 155);margin-top: 15px;font-weight: 900;text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);"><h2 style="background-color: #000;margin: 0 360px;border-radius: 8px;">*UNIVERSAL MARKET*</h2></div>
+<div style="display: flex;justify-content: space-between;margin-bottom:60px;padding: 30px;">
+    <div>
+        <h3 style="color:silver;text-align: center;margin: 0;font-family: cursive;font-size:20px;text-decoration: underline;">Bienvenido  {{email}}
+        </h3>
+        <div style="display: flex;justify-content: center;">
+        <img src={{profileImageURL}} alt="Foto de perfil" style="width: 120px; height: 150px; object-fit: cover; border-radius: 50%; box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);margin-top: 10px;">
+        </div>
+        <div style="text-align: center;margin-top: 8px;">
+            {{#unless isDefaultProfileImage}}
+            <a href="/users/delete-profile-image" style="text-align: center;text-decoration: none;color: silver">Eliminar foto</a>
+            {{/unless}}
+        </div>
+    </div>
+    <button onclick="location.href='/users/logout'"
+        style="border-radius: 38px;height: 25px;width: 100px;background-color: #000;color:  rgb(212, 14, 107);cursor: pointer;font-family: cursive;margin-top: 5px;">Logout</button>
+</div>
+
+<div style="display: flex;justify-content:center;margin-bottom:70px;padding: 5px;gap:90px;">
+    <button onclick="location.href='/realTimeProducts'"
+        style="border-radius: 8px;height: 25px;width: 200px;background-color: #000;color:  blue;cursor: pointer;font-family: cursive;margin-top: 5px;">
+        realTimeProducts</button>
+    <button onclick="location.href='/views/addProducts'"
+        style="border-radius: 8px;height: 25px;width: 200px;background-color: #000;color:  whitesmoke;cursor: pointer;font-family: cursive;margin-top: 5px;">Agregar producto</button>
+    <button onclick="location.href='/messages'"
+        style="border-radius: 8px;height: 25px;width: 200px;background-color: #000;color:  yellow;cursor: pointer;font-family: cursive;margin-top: 5px;">
+        messages</button>
+</div>
+<div style="display: flex;justify-content: space-around;margin-top: 100px 0;gap: 150px;">
+    
+    <div style="text-align: center;display: flex;justify-content:center;flex-direction: column;">
+        <div style="text-align: center;display: flex;justify-content:center;">
+            <h4 style="border-radius: 8px;height: 25px;width: 200px;background-color: #000;color:  rgb(212, 14, 107);cursor: pointer;font-family: cursive;margin-top: 5px;text-align: center;">Subir foto de perfil</h4>
+        </div>
+        <div>
+            <form action="/users/:uid/profile" method="POST" enctype="multipart/form-data" style="display: flex;justify-content: center;flex-direction: column;">
+                <input style="border-radius: 8px;height: 25px;width: 200px;background-color: #000;color:  rgb(212, 14, 107);cursor: pointer;font-family: cursive;margin-top: 5px;text-align: center;" type="file" name="img_profile" multiple>
+                <button type="submit"  style="border-radius: 8px;height: 25px;background-color: rgb(212, 14, 107);color: silver ;cursor: pointer;font-family: cursive;margin-top: 5px;">Enviar</button>
+            </form>
+        </div>
+    </div>
+
+    {{!-- <div style="text-align: center;display: flex;justify-content:center;">
+        <div style="text-align: center;display: flex;justify-content:center;flex-direction: column;">
+            <h4 style="border-radius: 8px;height: 25px;width: 200px;background-color: #000;color: whitesmoke;cursor: pointer;font-family: cursive;text-align: center;">Queres ser premium?</h4>
+        
+            <button onclick="location.href='/views/profileAddDocuments'"
+            style="border-radius: 8px;height: 25px;width: 200px;background-color: #000;color:  rgb(212, 14, 107);cursor: pointer;font-family: cursive;">Agregar documentos</button>
+        </div>
+    </div> --}}
+
+    <div style="display: flex;justify-content: center;">
+        <div style="display: flex;justify-content: center;flex-direction: column;">
+            <h4 style="border-radius: 8px;height: 25px;width: 200px;background-color: #000;color:  rgb(212, 14, 107);cursor: pointer;font-family: cursive;margin-top: 5px;text-align: center;font-size: 12px;">Queres vender un producto?</h4>
+            <form action="/users/:uid/products" method="post" enctype="multipart/form-data" style="display: flex;justify-content: center;flex-direction: column;">
+                <input style="border-radius: 8px;height: 25px;width: 200px;background-color: #000;color:  rgb(212, 14, 107);cursor: pointer;font-family: cursive;margin-top: 5px;text-align: center;" type="file" name="img_products" accept=".pdf,.jpg,.png"multiple>
+                <button style="border-radius: 8px;height: 25px;background-color: rgb(212, 14, 107);color: silver ;cursor: pointer;font-family: cursive;margin-top: 5px;">Subir img</button>
+            </form>        
+        </div>
+    </div>
+</div>
+
+
+
+<div style="text-align: center;display: flex;justify-content:space-around;gap: 155px;margin:80px 0;">
+    
+    <div style="display: flex;justify-content: center;flex-direction:column ;">
+        <h4 style="border-radius: 8px;height: 25px;width: 200px;background-color: #000;color:  rgb(212, 14, 107); pointer;font-family: cursive;margin-top: 5px;text-align: center;">Ingresa al carrito</h4>
+        <div>
+            <span>🛒</span>
+            <button onclick="location.href='/views/carShop'"
+            style="border-radius: 8px;height: 25px;width: 100px;background-color: rgb(212, 14, 107);color: silver ;cursor: pointer;font-family: cursive;">Carrito</button>
+        </div>
+        
+    </div>
+    
+    <div style="text-align: center;display: flex;justify-content:center;flex-direction: column;">
+        <h4 style="border-radius: 8px;height: 25px;width: 200px;background-color: #000;color:  rgb(212, 14, 107); pointer;font-family: cursive;margin-top: 5px;text-align: center;">Queres ser premium?</h4>
+        <button onclick="location.href='/views/profileAddDocuments'"
+        style="border-radius: 8px;height: 25px;width: 200px;background-color: rgb(212, 14, 107);color: silver ;cursor: pointer;font-family: cursive;">Agregar documentos</button>
+    </div>
+</div>
+
+ 
+    <div style="text-align: center;display: flex;justify-content:center;flex-direction: column;margin-bottom: 30px;">
+        <div style="text-align: center;display: flex;justify-content:center;">
+          <button onclick="location.href='/views/usersPanel'"
+        style="border-radius: 8px;height: 25px;width: 200px;background-color:#000; color: rgb(212, 14, 107);cursor: pointer;font-family: cursive;">Panel de usuarios</button>
+        </div>
+    </div>    
+
+<h1 style="color: rgb(212, 14, 107);text-align: center;margin: 5px 0;margin-bottom: 40px;font-family: cursive;font-size: 40px;background: #000;">Productos</h1>
+
+
+<div class="product-gallery">
+    {{#each prod}}
+    <div class="product-container">
+        <div class="product-image" style="background-image: url({{thumbnails}})"></div>
+        <div class="product-details">
+            <h3>{{title}}</h3>
+            <p>{{description}}</p>
+            <p>Precio: ${{price}}</p>
+            <p>Categoria: {{category}}</p>
+            <p>Stock: {{stock}}</p>
+            {{!-- <p>Status: {{status}}</p>
+            <p>Fecha de carga: {{fecha}}</p> --}}
+             <a href="/api/products/{{_id}}">Ver detalles</a>
+        </div>
+    </div>
+    {{/each}}
+</div>
+
+<script src="/js/cookieExtractor.js"></script>
